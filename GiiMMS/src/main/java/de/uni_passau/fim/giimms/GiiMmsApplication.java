@@ -17,5 +17,19 @@ public class GiiMmsApplication {
         SpringApplication.run(GiiMmsApplication.class, args);
     }
 
-
+    @Bean
+    public CommandLineRunner demo(EmployeeRepository employeeRepo) {
+        Logger log = LoggerFactory.getLogger(GiiMmsApplication.class);
+        // test findAll()
+        Coordinates testCoordinates = new Coordinates(48.566499, 13.4518444);
+        Employee testEmployee1 = new Employee("hans", "123456", testCoordinates, "Hans", "Gall", "Sysadmin");
+        Employee testEmployee2 = new Employee("flo", "654321", testCoordinates, "Nicola", "Berninger", "Software Engineer");
+        return (args) -> {
+            employeeRepo.save(testEmployee1);
+            employeeRepo.save(testEmployee2);
+            for (Employee employee : employeeRepo.findAll()) {
+                log.info(employee.toString());
+            }
+        };
+    }
 }

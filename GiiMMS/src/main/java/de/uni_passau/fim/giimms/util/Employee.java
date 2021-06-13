@@ -3,10 +3,12 @@ package de.uni_passau.fim.giimms.util;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+@Entity
 public class Employee {
 
     @Id
@@ -62,5 +64,22 @@ public class Employee {
         if (!isAvailable) {
             availableTimeEnd = System.currentTimeMillis();
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", coordinates=" + coordinates +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", position='" + position + '\'' +
+                ", availableTimeStart=" + availableTimeStart +
+                ", availableTimeEnd=" + availableTimeEnd +
+                ", status=" + status +
+                ", isAvailable=" + isAvailable +
+                '}';
     }
 }
