@@ -10,40 +10,23 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
+@Getter
+@Setter
 public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Getter
     private Long id;
-    @Getter
     private String username; // TODO: check for uniqueness
-    @Getter
     private String password; // TODO: the OTP functionality
     @Embedded
-    @Getter
-    @Setter
     private Coordinates coordinates; // TODO: get them automatically
-    @Getter
-    @Setter
     private String firstName;
-    @Getter
-    @Setter
     private String lastName;
-    @Getter
-    @Setter
     private String position;
-    @Getter
-    @Setter
     private long availableTimeStart; // column in the database
-    @Getter
-    @Setter
     private long availableTimeEnd; // column in the database
-    @Getter
-    @Setter
     private boolean status;
-    @Getter
-    @Setter
     private boolean isAvailable;
 
     protected Employee() {

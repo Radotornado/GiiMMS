@@ -1,0 +1,27 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", serif;
+}
+
+body {
+    background: linear-gradient(45deg, #49C49D 20%, #A2B7E5 80%);
+    height: 100%;
+    overflow: hidden;
+}
+
+.error {
+    width: 90%;
+    max-width: 500px;
+    margin: 10vh auto;
+    color: #000000;
+    text-align: center;
+}
+
+.logo {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 20px;
+}
+

@@ -12,20 +12,20 @@ body {
 }
 
 .form {
-    width: 40%;
-    max-width: 260px;
+    width: 90%;
+    max-width: 500px;
     margin: 10vh auto;
     color: #000000;
 }
 
 .formHeader {
     text-align: center;
-    font-size: 18px;
+    font-size: 24px;
 }
 
 .logo {
-    width: 80px;
-    height: 80px;
+    width: 150px;
+    height: 150px;
     margin-bottom: 10px;
 }
 
@@ -52,5 +52,4 @@ body {
     outline: 0;
     border: 0;
     color: #000000;
-    background: #d5d0c9;
 }

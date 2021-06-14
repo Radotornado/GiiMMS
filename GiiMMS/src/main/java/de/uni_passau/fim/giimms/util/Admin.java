@@ -18,5 +18,5 @@ public class Admin {
     private String username; // TODO: check for uniqueness
     @Getter
     private String password; // TODO: the OTP functionality
-    // TODO: list of employees;
+    // TODO: list of employees
 }
