@@ -5,7 +5,7 @@
     font-family: "Roboto", serif;
 }
 
-body {
+html {
     background: linear-gradient(45deg, #49C49D 20%, #A2B7E5 80%);
     height: 100%;
     overflow: hidden;
@@ -33,7 +33,6 @@ body {
     margin-top: 40px;
     border-radius: 6px;
     overflow: hidden;
-    font-size: 14px;
 }
 
 .formInput {
@@ -43,6 +42,7 @@ body {
     outline: 0;
     border: 0;
     background: #E0E0E0;
+    font-size: 20px;
 }
 
 .btn {
@@ -52,4 +52,5 @@ body {
     outline: 0;
     border: 0;
     color: #000000;
+    font-size: 20px;
 }

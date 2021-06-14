@@ -16,7 +16,7 @@ public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
     private String username; // TODO: check for uniqueness
     private String password; // TODO: the OTP functionality
     @Embedded

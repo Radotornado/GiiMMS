@@ -1,0 +1,22 @@
+.copyright {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    background: lightgray;
+    height: 50px;
+    font-size: 20px;
+    font-family: "Roboto", serif;
+    color: #333333;
+}
+
+.copyright span {
+    position: relative;
+    top: 30%;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
