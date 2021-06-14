@@ -1,0 +1,56 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", serif;
+}
+
+body {
+    background: linear-gradient(45deg, #49C49D 20%, #A2B7E5 80%);
+    height: 100%;
+    overflow: hidden;
+}
+
+.form {
+    width: 40%;
+    max-width: 260px;
+    margin: 10vh auto;
+    color: #000000;
+}
+
+.formHeader {
+    text-align: center;
+    font-size: 18px;
+}
+
+.logo {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 10px;
+}
+
+.loginForm {
+    margin-top: 40px;
+    border-radius: 6px;
+    overflow: hidden;
+    font-size: 14px;
+}
+
+.formInput {
+    display: block;
+    width: 100%;
+    padding: 20px;
+    outline: 0;
+    border: 0;
+    background: #E0E0E0;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 20px;
+    outline: 0;
+    border: 0;
+    color: #000000;
+    background: #d5d0c9;
+}

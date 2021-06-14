@@ -3,6 +3,7 @@ package de.uni_passau.fim.giimms.util;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,6 +20,7 @@ public class Employee {
     private String username; // TODO: check for uniqueness
     @Getter
     private String password; // TODO: the OTP functionality
+    @Embedded
     @Getter
     @Setter
     private Coordinates coordinates; // TODO: get them automatically
