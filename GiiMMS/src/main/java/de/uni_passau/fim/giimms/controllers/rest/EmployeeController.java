@@ -3,22 +3,26 @@ package de.uni_passau.fim.giimms.controllers.rest;
 import de.uni_passau.fim.giimms.repositories.EmployeeRepository;
 import de.uni_passau.fim.giimms.util.Coordinates;
 import de.uni_passau.fim.giimms.util.Employee;
+import de.uni_passau.fim.giimms.util.EmployeeNotFoundException;
 import lombok.AllArgsConstructor;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Map;
 
 @RestController
-@RequestMapping("/employees")
 @AllArgsConstructor
-public class AuthController {
+public class EmployeeController {
 
     private final EmployeeRepository employeeRepository;
 
-    @RequestMapping("/register")
-    public String addEvent(@RequestBody Map<String, Object> map) {
+    @PostMapping("/employees/register")
+    public ModelAndView addEmployee(@RequestBody Map<String, Object> map) {
         String username = (String) map.get("username");
         String password = (String) map.get("password");
         double latitude = (double) map.get("latitude");
@@ -31,6 +35,21 @@ public class AuthController {
                 firstName, lastName, position);
         // todo handle errors
         employeeRepository.save(employee);
-        return "redirect:/adminPage";
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("adminPage");
+        return modelAndView;
     }
+
+    @GetMapping("/employees/getEmployee/{id}")
+    public ModelAndView showProfile(@PathVariable("id") int id, Model model) {
+        Employee employee = employeeRepository.findById(id);
+        if (employee == null) {
+            throw new EmployeeNotFoundException("Invalid id.");
+        }
+        model.addAttribute("employee", employee);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("employeeProfile");
+        return modelAndView;
+    }
+
 }
