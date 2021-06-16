@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -40,8 +41,8 @@ public class EmployeeController {
         return modelAndView;
     }
 
-    @GetMapping("/employees/getEmployee/{id}")
-    public ModelAndView showProfile(@PathVariable("id") int id, Model model) {
+    @GetMapping("/employees/{id}")
+    public ModelAndView showProfile(@PathVariable("id") long id, Model model) {
         Employee employee = employeeRepository.findById(id);
         if (employee == null) {
             throw new EmployeeNotFoundException("Invalid id.");
@@ -49,6 +50,16 @@ public class EmployeeController {
         model.addAttribute("employee", employee);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("employeeProfile");
+        return modelAndView;
+    }
+
+    @GetMapping("/employees/getAllEmployees")
+    public ModelAndView showAll(Model model) {
+        List<Employee> employees = (List<Employee>) employeeRepository.findAll();
+        model.addAttribute("employees", employees);
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("adminPage");
         return modelAndView;
     }
 

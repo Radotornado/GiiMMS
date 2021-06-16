@@ -3,8 +3,6 @@ package de.uni_passau.fim.giimms;
 import de.uni_passau.fim.giimms.repositories.EmployeeRepository;
 import de.uni_passau.fim.giimms.util.Coordinates;
 import de.uni_passau.fim.giimms.util.Employee;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,17 +17,16 @@ public class GiiMmsApplication {
 
     @Bean
     public CommandLineRunner demo(EmployeeRepository employeeRepo) {
-        Logger log = LoggerFactory.getLogger(GiiMmsApplication.class);
-        // test findAll()
-        Coordinates testCoordinates = new Coordinates(48.566499, 13.4518444);
-        Employee testEmployee1 = new Employee("hans", "123456", testCoordinates, "Hans", "Gall", "Sysadmin");
-        Employee testEmployee2 = new Employee("flo", "654321", testCoordinates, "Florian", "Berninger", "Software Engineer");
+        //Logger log = LoggerFactory.getLogger(GiiMmsApplication.class);
+        Coordinates testCoordinates1 = new Coordinates(48.566499, 13.4518444);
+        Coordinates testCoordinates2 = new Coordinates(48.566349, 13.4511344);
+        Employee testEmployee1 = new Employee("hans", "123456", testCoordinates1, "Hans", "Gall", "Sysadmin");
+        Employee testEmployee2 = new Employee("flo", "654321", testCoordinates1, "Florian", "Berninger", "Software Engineer");
+        Employee testEmployee3 = new Employee("nina", "nina123", testCoordinates2, "Nina", "Schmidt", "QA Tester");
         return (args) -> {
             employeeRepo.save(testEmployee1);
             employeeRepo.save(testEmployee2);
-            for (Employee employee : employeeRepo.findAll()) {
-                log.info(employee.toString());
-            }
+            employeeRepo.save(testEmployee3);
         };
     }
 }
