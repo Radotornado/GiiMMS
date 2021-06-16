@@ -3,6 +3,7 @@ package de.uni_passau.fim.giimms.util;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,17 +17,28 @@ public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", unique = true, nullable = false)
     private long id;
-    private String username; // TODO: check for uniqueness
+    @Column(name = "username", unique = true, nullable = false)
+    private String username;
+    @Column(name = "password", nullable = false)
     private String password; // TODO: the OTP functionality
     @Embedded
+    @Column(name = "coordinates", nullable = false)
     private Coordinates coordinates; // TODO: get them automatically
+    @Column(name = "firstName", nullable = false)
     private String firstName;
+    @Column(name = "lastName", nullable = false)
     private String lastName;
+    @Column(name = "position", nullable = false)
     private String position;
-    private long availableTimeStart; // column in the database
-    private long availableTimeEnd; // column in the database
+    @Column(name = "availableTimeStart", nullable = false)
+    private long availableTimeStart;
+    @Column(name = "availableTimeEnd", nullable = false)
+    private long availableTimeEnd;
+    @Column(name = "status", nullable = false)
     private boolean status;
+    @Column(name = "isAvailable", nullable = false)
     private boolean isAvailable;
 
     protected Employee() {

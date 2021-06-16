@@ -11,8 +11,15 @@ public class HomeController {
         return "index";
     }
 
+    // temporary just for testing
     @RequestMapping("/adminPage")
     public String getAdminPage() {
         return "adminPage";
     }
+
+    // temporary just for testing
+    @RequestMapping("/addEmployee")
+    public String getAddEmployeePage() { return "addEmployee"; }
+
+
 }
