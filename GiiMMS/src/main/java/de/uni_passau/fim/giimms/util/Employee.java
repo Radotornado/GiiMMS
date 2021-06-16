@@ -24,7 +24,7 @@ public class Employee {
     @Column(name = "password", nullable = false)
     private String password; // TODO: the OTP functionality
     @Embedded
-    @Column(name = "coordinates", nullable = false)
+    @Column(name = "coordinates")
     private Coordinates coordinates; // TODO: get them automatically
     @Column(name = "firstName", nullable = false)
     private String firstName;
@@ -32,16 +32,16 @@ public class Employee {
     private String lastName;
     @Column(name = "position", nullable = false)
     private String position;
-    @Column(name = "availableTimeStart", nullable = false)
+    @Column(name = "availableTimeStart")
     private long availableTimeStart;
-    @Column(name = "availableTimeEnd", nullable = false)
+    @Column(name = "availableTimeEnd")
     private long availableTimeEnd;
-    @Column(name = "status", nullable = false)
+    @Column(name = "status")
     private boolean status;
-    @Column(name = "isAvailable", nullable = false)
+    @Column(name = "isAvailable")
     private boolean isAvailable;
 
-    protected Employee() {
+    public Employee() {
     }
 
     public Employee(String username, String password, Coordinates coordinates,
