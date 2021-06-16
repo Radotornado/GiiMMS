@@ -1,0 +1,26 @@
+#button1 {
+    cursor: pointer;
+    border: none;
+    height: 40px;
+    width: 40px;
+    text-decoration: none;
+    display: inline-block;
+    position: fixed;
+    top: 1.25rem;
+    right: 1.25rem;
+    background-size: cover;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+#ProfileCol1, #ProfileCol2, #ProfileCol3 {
+    border: 0;
+}
+
+html {
+    background: linear-gradient(45deg, #49C49D 20%, #A2B7E5 80%);
+    height: 100%;
+    overflow: hidden;
+}

@@ -1,39 +1,12 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/adminStyle.css}">
     <title>Admin page Template</title>
-    <style>
-#button1 {
-   background:url(.src\main\resources\static\img\logo.png)
-    no-repeat;
-    cursor:pointer;
-    border:none;
-    height:40px;
-    width:40px;
-    text-decoration: none;
-    display: inline-block;
-	position: fixed;
-    top: 1.25rem; right: 1.25rem
-
-}
-table, th,td {
-  border: 1px solid black;
-}
-#ProfileCol {
-border : 0px;
-}
-html {
-    background: linear-gradient(45deg, #49C49D 20%, #A2B7E5 80%);
-    height: 100%;
-    overflow: hidden;
-}
-</style>
 </head>
 <body>
-<!-- todo
-here is a list of all employees and option to add a new one
--->
 <h1>Welcome admin</h1>
-<p>The list of all current employees and their availability<p>
+<p>The list of all current employees and their availability
+<p>
 <table style="width:100%">
 
     <tr>
@@ -42,7 +15,7 @@ here is a list of all employees and option to add a new one
         <th>Start of Work:</th>
         <th>End of Work:</th>
         <th>Status</th>
-        <th id="ProfileCol"></th>
+        <th id="ProfileCol1"></th>
     </tr>
     <tr>
         <td>Jill</td>
@@ -51,7 +24,9 @@ here is a list of all employees and option to add a new one
         <td></td>
         <td></td>
 
-        <td id="ProfileCol"><button>Profile</button></td>
+        <td id="ProfileCol2">
+            <button>Profile</button>
+        </td>
     </tr>
     <tr>
         <td>Eve</td>
@@ -59,12 +34,17 @@ here is a list of all employees and option to add a new one
         <td></td>
         <td></td>
         <td></td>
-        <td id="ProfileCol"><button>Profile</button></td>
+        <td id="ProfileCol3">
+            <button>Profile</button>
+        </td>
     </tr>
 
 </table>
 <form>
-    <input type="image" id ="button1"  src="C:\Users\matth\Intellij Projekte\g11-21ss-web.data.eng\GiiMMS\src\main\resources\static\img\favicon.ico">
+
+    <input type="image" id="button1"
+           th:style="'background-image:url(' + @{/img/logo.png} + ')'"
+    alt="">
 </form>
 
 </body>
