@@ -1,15 +1,12 @@
 package de.uni_passau.fim.giimms.repositories;
 
 import de.uni_passau.fim.giimms.util.Employee;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-import java.util.Optional;
-
 @Repository
-public interface EmployeeRepository extends CrudRepository<Employee, String> {
+public interface EmployeeRepository extends JpaRepository<Employee, String> {
     Employee findById(long id);
 
-    Optional<Employee> findByUsername(String username);
+    Employee findByUsername(String username);
 }

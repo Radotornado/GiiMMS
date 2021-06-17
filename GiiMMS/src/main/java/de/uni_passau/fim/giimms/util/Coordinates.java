@@ -14,8 +14,8 @@ import javax.persistence.Embeddable;
 @AllArgsConstructor
 public class Coordinates {
 
-    private double latitude;
-    private double longitude;
+    private Double latitude;
+    private Double longitude;
 
     @Override
     public String toString() {

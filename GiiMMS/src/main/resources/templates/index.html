@@ -3,6 +3,64 @@
     <link type="text/css" rel="stylesheet" th:href="@{/css/formStyle.css}">
     <link rel="shortcut icon" type="image/png" th:href="@{/img/favicon.ico}"/>
     <title>Terminal</title>
+    <script>
+        const fetchService = new FetchService();
+
+        const loginForm = document.querySelector("#loginForm");
+        if (loginForm) {
+            loginForm.addEventListener("submit", function (e) {
+                submitForm(e, this);
+            });
+        }
+
+        async function submitForm(e, form) {
+            e.preventDefault(); // prevent reloading of the page
+            const btn = document.getElementsByClassName("btn");
+            btn.disabled = true;
+            setTimeout(() => btn.disabled = false, 2000);
+            const json = buildJsonFromData(form);
+            const headers = buildHeaders();
+            console.log(json);
+            console.log(headers);
+            const response = await fetchService.performPostHttpReq('/', headers, json);
+            console.log(response);
+        }
+
+        function buildHeaders(authorization = null) {
+            const headers = {
+                "Content-Type": "application/json",
+                "Authorization": (authorization) ? authorization : "Bearer TOKEN_MISSING"
+            };
+            return headers;
+        }
+
+        function buildJsonFromData(form) {
+            const json = {};
+            for (const pair of new FormData(form)) {
+                json[pair[0]]=pair[1];
+            }
+            return json;
+        }
+        export default class FetchService {
+            async performPostHttpReq(fetchLink, headers, body) {
+                if (!fetchLink || !headers || !body) {
+                    throw new Error("One or more POST request parameters was not passed.");
+                }
+                try {
+                    const rawResponse = await fetch(fetchLink, {
+                        method: "POST",
+                        headers: headers,
+                        body: JSON.stringify(body)
+                    });
+                    const content = await rawResponse.json();
+                    return content;
+                } catch (err) {
+                    console.error(`Error at fetch POST: ${err}`);
+                    throw err;
+                }
+            }
+        }
+    </script>
 </head>
 <body>
 <div class="form">
@@ -10,14 +68,14 @@
         <img th:src="@{/img/logo.png}" alt="logo" class="logo">
         <h1>GiiMMS Terminal</h1>
     </header>
-    <form class="loginForm">
+    <form class="loginForm" id="loginForm" action="">
         <div class="formGroup">
             <input type="text" placeholder="Username" class="formInput"/>
         </div>
         <div class="formGroup">
             <input type="password" placeholder="Password" class="formInput"/>
         </div>
-        <button class="btn" type="button" onclick="">Login</button>
+        <button class="btn" type="submit" name="loginbtn">Login</button>
     </form>
 </div>
 <footer>
