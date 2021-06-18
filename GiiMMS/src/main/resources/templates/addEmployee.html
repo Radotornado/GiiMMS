@@ -20,8 +20,8 @@
     <h1>Register new Employee:</h1>
     <form th:action="@{/addEmployee}" method="POST" th:object="${employee}">
         <div class="formGroup">
-            <label class="controlLabel" for="username"> Username </label>
-            <input id="username" class="formControl" th:field="*{username}"
+            <label class="controlLabel" for="username"> Email </label>
+            <input id="username" class="formControl" th:field="*{email}"
                    required autofocus="autofocus"/>
         </div>
 

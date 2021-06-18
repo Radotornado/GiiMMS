@@ -1,7 +1,14 @@
 package de.uni_passau.fim.giimms.util;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -9,18 +16,24 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Collection;
+import java.util.Collections;
 
-@Entity
 @Getter
 @Setter
-public class Employee {
+@Builder
+@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity(name = "Employees")
+public class Employee implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
     private long id;
-    @Column(name = "username", unique = true, nullable = false)
-    private String username;
+    @Column(name = "email", unique = true, nullable = false)
+    private String email;
     @Column(name = "password", nullable = false)
     private String password; // TODO: the OTP functionality
     @Embedded
@@ -41,12 +54,17 @@ public class Employee {
     @Column(name = "isAvailable")
     private boolean isAvailable;
 
-    public Employee() {
-    }
+    @Builder.Default
+    private Role employeeRole = Role.EMPLOYEE;
+    @Builder.Default
+    private Boolean locked = false;
+    @Builder.Default
+    private Boolean enabled = false;
 
-    public Employee(String username, String password, Coordinates coordinates,
+
+    public Employee(String email, String password, Coordinates coordinates,
                     String firstName, String lastName, String position) {
-        this.username = username;
+        this.email = email;
         this.password = password;
         this.coordinates = coordinates;
         this.firstName = firstName;
@@ -67,7 +85,7 @@ public class Employee {
     public String toString() {
         return "Employee{" +
                 "id=" + id +
-                ", username='" + username + '\'' +
+                ", username='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", coordinates=" + coordinates +
                 ", firstName='" + firstName + '\'' +
@@ -78,5 +96,42 @@ public class Employee {
                 ", status=" + status +
                 ", isAvailable=" + isAvailable +
                 '}';
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+
+        final SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(employeeRole.name());
+        return Collections.singletonList(simpleGrantedAuthority);
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return !locked;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
     }
 }
