@@ -1,4 +1,5 @@
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <link rel="shortcut icon" type="image/png" th:href="@{/img/favicon.ico}"/>
     <link type="text/css" rel="stylesheet" th:href="@{/css/employeeStyle.css}">
@@ -12,39 +13,14 @@
     </form>
 </div>
 <!--First collum, in which employee can change his Profile picture.-->
-<div class="grid-container">
-    <input type="image" id="pic2" src="http://placehold.it/180x180" alt="" />
-    <nav>
-        <!-- Contact Information of the Employee -->
-        <div class="grid-item"> <h1 id="ContactHeader">Contact</h1>
-            <p>Email:   <input id="input1" type="text"></p><br>
-            <p>Phone:   <input id="input2" type="text"></p><br>
-            <p>Mobile:  <input id="input3" type="text"></p><br>
-            <p>Address: <input id="input4" type="text"></p>
-        </div>
-    </nav>
-    <!--Information on the right Side-->
-    <div class="grid-item"><aside>
-        <h1 id="InfoHeader">Information</h1>
-        <p>Username:    <span th:text="${employee.username}"></span></p> <br>
-        <p> Coordinates:  <span th:text="${employee.coordinates}"></span> </p><br>
-        <p> Firstname:    <span th:text="${employee.firstName}"></span></p><br>
-        <p> Lastname:     <span th:text="${employee.lastName}"></span></p><br>
-        <p> Position:     <span th:text="${employee.position}"></span></p><br>
-        <p> is Available: <span th:text="${employee.isAvailable}"></span></p><br>
-        <p>Status:        <span th:text="${employee.status}"></span></p>
+<div class="container">
+    <div sec:authorize="isAuthenticated()">
+        <form id="logoutForm" method="POST" th:action="@{/logout}">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        </form>
 
-    </aside>
+        <h2>Welcome <span sec:authentication="name"></span> | <a onclick="document.forms['logoutForm'].submit()">Logout</a></h2>
     </div>
 </div>
-<!-- this is where an Employee can see and change his profile -->
-<!-- todo styling -->
-<span th:text="${employee.username}"></span> <br>
-<span th:text="${employee.coordinates}"></span><br>
-<span th:text="${employee.firstName}"></span><br>
-<span th:text="${employee.lastName}"></span><br>
-<span th:text="${employee.position}"></span><br>
-<span th:text="${employee.isAvailable}"></span><br>
-<span th:text="${employee.status}"></span>
 </body>
 </html>

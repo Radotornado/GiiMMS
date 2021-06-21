@@ -1,14 +1,12 @@
-package de.uni_passau.fim.giimms.util;
+package de.uni_passau.fim.giimms.model;
 
+import de.uni_passau.fim.giimms.util.Coordinates;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -16,8 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Collection;
-import java.util.Collections;
+import javax.persistence.ManyToMany;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -25,8 +23,8 @@ import java.util.Collections;
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "Employees")
-public class Employee implements UserDetails {
+@Entity(name = "employee")
+public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,12 +52,8 @@ public class Employee implements UserDetails {
     @Column(name = "isAvailable")
     private boolean isAvailable;
 
-    @Builder.Default
-    private Role employeeRole = Role.EMPLOYEE;
-    @Builder.Default
-    private Boolean locked = false;
-    @Builder.Default
-    private Boolean enabled = false;
+    @ManyToMany
+    private Set<Role> roles;
 
 
     public Employee(String email, String password, Coordinates coordinates,
@@ -85,7 +79,7 @@ public class Employee implements UserDetails {
     public String toString() {
         return "Employee{" +
                 "id=" + id +
-                ", username='" + email + '\'' +
+                ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", coordinates=" + coordinates +
                 ", firstName='" + firstName + '\'' +
@@ -96,42 +90,5 @@ public class Employee implements UserDetails {
                 ", status=" + status +
                 ", isAvailable=" + isAvailable +
                 '}';
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-
-        final SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(employeeRole.name());
-        return Collections.singletonList(simpleGrantedAuthority);
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return email;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return !locked;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return enabled;
     }
 }

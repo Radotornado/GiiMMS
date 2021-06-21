@@ -14,45 +14,37 @@
 <h1> Create a new Employee</h1>
 <div class="container">
 
-    <div th:if="${param.success}">
-        <div class="alert">Employee registered.</div>
+    <div class="container">
+
+        <form method="POST" class="form" th:object="${employeeForm}" th:action="@{/addEmployee}">
+            <h2 class="form-add-heading">Create your account</h2>
+            <div class="form-group">
+                <input type="text" th:field="*{email}" class="form-control" placeholder="Email"
+                       autofocus="true">
+                <span class="has-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="password" th:field="*{password}" class="form-control" placeholder="Password">
+                <span class="has-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="text" th:field="*{firstName}" class="form-control" placeholder="First Name">
+            </div>
+
+            <div class="form-group">
+                <input type="text" th:field="*{lastName}" class="form-control" placeholder="Last Name">
+            </div>
+
+            <div class="form-group">
+                <input type="text" th:field="*{position}" class="form-control" placeholder="Position">
+            </div>
+
+            <button class="btn" type="submit">Submit</button>
+        </form>
+
     </div>
-    <h1>Register new Employee:</h1>
-    <form th:action="@{/addEmployee}" method="POST" th:object="${employee}">
-        <div class="formGroup">
-            <label class="controlLabel" for="username"> Email </label>
-            <input id="username" class="formControl" th:field="*{email}"
-                   required autofocus="autofocus"/>
-        </div>
-
-        <div class="formGroup">
-            <label class="controlLabel" for="password"> Password </label>
-            <input id="password" class="formControl" th:field="*{password}"
-                   required autofocus="autofocus"/>
-        </div>
-
-        <div class="formGroup">
-            <label class="controlLabel" for="firstName"> First Name </label>
-            <input id="firstName" class="formControl" th:field="*{firstName}"
-                   required autofocus="autofocus"/>
-        </div>
-
-        <div class="formGroup">
-            <label class="controlLabel" for="lastName"> Last Name </label>
-            <input id="lastName" class="formControl" th:field="*{lastName}"
-                   required autofocus="autofocus"/>
-        </div>
-
-        <div class="formGroup">
-            <label class="controlLabel" for="position"> Position </label>
-            <input id="position" class="formControl" th:field="*{position}"
-                   required autofocus="autofocus"/>
-        </div>
-
-        <div class="formGroup">
-            <button type="submit" class="btn">Register</button>
-        </div>
-    </form>
 </div>
 
 </body>

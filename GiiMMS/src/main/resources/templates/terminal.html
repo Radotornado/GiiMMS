@@ -1,0 +1,29 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/formStyle.css}">
+    <link rel="shortcut icon" type="image/png" th:href="@{/img/favicon.ico}"/>
+    <title>Terminal</title>
+</head>
+<body>
+<div class="container">
+    <!-- todo: return styling -->
+    <form class="form" method="POST" th:action="@{/terminal}">
+        <h2 class="form-heading">Log in</h2>
+
+        <div class="form-group">
+            <span th:text="${message}"></span>
+            <input name="email" type="text" class="form-control" placeholder="Email"
+                   autofocus="true"/>
+
+            <input name="password" type="password" class="form-control" placeholder="Password"/>
+            <span class="has-error" th:text="${error}"></span>
+
+            <button class="btn" type="submit">Log In</button>
+        </div>
+    </form>
+</div>
+<footer>
+    <div th:include="fragments/copyright"></div>
+</footer>
+</body>
+</html>

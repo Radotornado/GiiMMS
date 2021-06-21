@@ -1,8 +1,8 @@
 package de.uni_passau.fim.giimms;
 
+import de.uni_passau.fim.giimms.model.Employee;
 import de.uni_passau.fim.giimms.repositories.EmployeeRepository;
 import de.uni_passau.fim.giimms.util.Coordinates;
-import de.uni_passau.fim.giimms.util.Employee;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -27,6 +27,9 @@ public class GiiMmsApplication {
             employeeRepo.save(testEmployee1);
             employeeRepo.save(testEmployee2);
             employeeRepo.save(testEmployee3);
+            //for (Employee employee : employeeRepo.findAll()) {
+            //    log.info(employee.toString());
+            //}
         };
     }
 }
