@@ -44,7 +44,7 @@ public class EmployeeController {
 
         employeeService.save(employeeForm);
 
-        securityService.autoLogin(employeeForm.getEmail(), employeeForm.getPassword());
+        securityService.autoLogin(employeeForm.getUsername(), employeeForm.getPassword());
 
         return "redirect:/employeeProfile";
     }
@@ -57,7 +57,7 @@ public class EmployeeController {
         }
 
         if (error != null)
-            model.addAttribute("error", "Email or password is invalid.");
+            model.addAttribute("error", "Username or password is invalid.");
 
         if (logout != null)
             model.addAttribute("message", "Logged out successfully.");

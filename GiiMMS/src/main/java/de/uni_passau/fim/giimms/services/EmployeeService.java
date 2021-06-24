@@ -7,5 +7,5 @@ import org.springframework.stereotype.Service;
 public interface EmployeeService {
     void save(Employee employee);
 
-    Employee findByEmail(String email);
+    Employee findByUsername(String username);
 }

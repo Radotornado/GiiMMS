@@ -30,8 +30,8 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
     private long id;
-    @Column(name = "email", unique = true, nullable = false)
-    private String email;
+    @Column(name = "username", unique = true, nullable = false)
+    private String username;
     @Column(name = "password", nullable = false)
     private String password; // TODO: the OTP functionality
     @Embedded
@@ -56,9 +56,9 @@ public class Employee {
     private Set<Role> roles;
 
 
-    public Employee(String email, String password, Coordinates coordinates,
+    public Employee(String username, String password, Coordinates coordinates,
                     String firstName, String lastName, String position) {
-        this.email = email;
+        this.username = username;
         this.password = password;
         this.coordinates = coordinates;
         this.firstName = firstName;
@@ -79,7 +79,7 @@ public class Employee {
     public String toString() {
         return "Employee{" +
                 "id=" + id +
-                ", email='" + email + '\'' +
+                ", email='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", coordinates=" + coordinates +
                 ", firstName='" + firstName + '\'' +

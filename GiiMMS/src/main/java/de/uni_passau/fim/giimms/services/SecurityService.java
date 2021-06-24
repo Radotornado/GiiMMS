@@ -6,6 +6,6 @@ import org.springframework.stereotype.Service;
 public interface SecurityService {
     boolean isAuthenticated();
 
-    void autoLogin(String email, String password);
+    void autoLogin(String username, String password);
 }
 

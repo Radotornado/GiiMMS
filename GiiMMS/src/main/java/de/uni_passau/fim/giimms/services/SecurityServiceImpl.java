@@ -34,15 +34,16 @@ public class SecurityServiceImpl implements SecurityService {
     }
 
     @Override
-    public void autoLogin(String email, String password) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(email);
+    public void autoLogin(String username, String password) {
+        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+        // I think the error was here ^ UserDetails cannot find by email
         UsernamePasswordAuthenticationToken token
                 = new UsernamePasswordAuthenticationToken(userDetails, password,
                 userDetails.getAuthorities());
         authManager.authenticate(token);
         if (token.isAuthenticated()) {
             SecurityContextHolder.getContext().setAuthentication(token);
-            log.info("Auto login + " + email + " successfully.");
+            log.info("Auto login + " + username + " successfully.");
         }
     }
 }
