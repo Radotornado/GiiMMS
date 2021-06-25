@@ -3,24 +3,73 @@
 <head>
     <link rel="shortcut icon" type="image/png" th:href="@{/img/favicon.ico}"/>
     <link type="text/css" rel="stylesheet" th:href="@{/css/employeeStyle.css}">
+    <script th:src="@{/js/map.js}"></script>
     <title>Employee page Template</title>
 </head>
 <body>
-<!-- Header with the Logo of the Software -->
-<div class="header">
-    <form>
-        <img id="pic" th:src="@{/img/logo.png}" />
-    </form>
-</div>
-<!--First collum, in which employee can change his Profile picture.-->
-<div class="container">
-    <div sec:authorize="isAuthenticated()">
-        <form id="logoutForm" method="POST" th:action="@{/logout}">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        </form>
 
-        <h2>Welcome <span sec:authentication="username" sec:text="username"></span> | <a onclick="document.forms['logoutForm'].submit()">Logout</a></h2>
+<div sec:authorize="isAuthenticated()">
+    <div class="container">
+        <header class="header">
+            <img th:src="@{/img/logo.png}" alt="logo" class="logo">
+            <h1>Welcome Hans!</h1> <!-- fixme: dummy data -->
+        </header>
+
+        <div class="data">
+            <div class="left">
+                <span class="entry">
+                    <text class="prefix">Username :</text>
+                    <span th:text="${#authentication.name}"></span>
+                </span><br/>
+                <span class="entry">
+                    <text class="prefix">Last name:</text>
+                    <!-- fixme: dummy data -->  Gall
+                </span><br/>
+                <span class="entry">
+                    <text class="prefix">Position:</text>
+                    <!-- fixme: dummy data --> Sysadmin
+                </span><br/>
+                <span class="entry">
+                    <text class="prefix">Time since login:</text>
+                    <!-- fixme: dummy data -->
+                    <div id="timeElapsed"></div>
+                </span>
+                <span class="entry">
+                    <text class="prefix">Availability:</text>
+                        <input type="checkbox" checked>
+                    </span><br/>
+                <span class="entry">
+                    <text class="prefix">Details about work:</text>
+                    <textarea class="details" rows="4"></textarea>
+                </span><br/>
+                <button class="btn">Submit</button> <!-- todo fix button -->
+
+                <form id="logoutForm" method="POST" th:action="@{/logout}"/>
+                <button class="btn"
+                        onclick="document.forms['logoutForm'].submit()">
+                    Logout
+                </button>
+
+            </div>
+
+            <div class="right">
+                <div id="map">48.5656715, 13.4337966
+                    <!-- fixme: dummy data --></div>
+                <script
+                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAr08bWCmHTZIi1j6pWWYLA3hso28Bn2YU&callback=initMap&libraries=&v=weekly"
+                        async
+                ></script>
+
+            </div>
+
+
+        </div>
+
+
     </div>
 </div>
+<footer>
+    <div th:include="fragments/copyright"></div>
+</footer>
 </body>
 </html>

@@ -26,7 +26,6 @@ public class SecurityServiceImpl implements SecurityService {
     @Override
     public boolean isAuthenticated() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
         if (auth == null || AnonymousAuthenticationToken.class.isAssignableFrom(auth.getClass())) {
             return false;
         }

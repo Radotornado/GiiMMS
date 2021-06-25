@@ -1,71 +1,103 @@
-.header {
-  text-align: center;
-  font-size: 20px;
-  background: linear-gradient(45deg, #49C49D 15%, #A2B7E5 80%);
-  overflow: hidden;
-  padding:0px;
-}
-
-#pic {
-width:100px;
-height:100px;
-display:inline-block;
-margin: 0 ;
-}
-
-aside {
-float: left;
-width:100%;
-grid-row: 2 / 4;
-}
-
-#header1 {
-text-align:center;
-font-size:18px;
-}
-
-p {
-color:Grey;
-font-size:18px;
-margin-top: 0;
-margin-bottom: 0;
-}
-
-span  {
-font-size:18px;
-}
-
-#ContactHeader {
-width:100%;
-}
-
-nav {
-width:100%;
-}
-
-.grid-container {
- display: grid;
-  grid-template-columns:20% auto auto;
-  padding: 0px;
-}
-
-.grid-item {
-  padding: 100px;
-  font-size: 30px;
-  text-align: left;
- }
-
-#pic2 {
-border-radius:50%;
-}
-
-#input1, #input2, #input3, #input4 {
-float:right;
-width:180px;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", serif;
 }
 
 html {
-background-color:#d1e4df;
+    background: linear-gradient(45deg, #49C49D 20%, #A2B7E5 80%);
+    height: 100%;
+    overflow: hidden;
+}
+
+.container {
+    width: 90%;
+    max-width: 1300px;
+    margin: 5vh auto 10vh auto;
+    color: #000000;
+}
+
+.header {
+    text-align: center;
+    font-size: 24px;
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+
+.left {
+    width: 30%;
+    float: left;
+    padding-right: 10px;
+}
+
+.right {
+    width: 70%;
+    float: right;
+}
+
+#map {
+    height: 400px;
+    width: 100%;
+}
+
+#timeElapsed {
+    font-size: 20px;
 }
 
 
+.data {
+    margin-top: 40px;
+    border-radius: 6px;
+    overflow: hidden;
+    display: block;
+    width: 100%;
+    padding: 20px;
+    outline: 0;
+    border: 0;
+    background: #E0E0E0;
+    font-size: 26px;
+}
+
+h3 {
+    margin-top: 15px;
+}
+
+.entry {
+    padding-top: 5px;
+    font-size: 20px;
+    display: contents;
+}
+
+.prefix {
+    color: #444444;
+}
+
+.details {
+    border: 0;
+    border-top: 1px solid #d2d2d2;
+    border-bottom: 1px solid #d2d2d2;
+    outline: 0;
+    color: #212121;
+    padding: 7px 0;
+    background: #ebebeb;
+    width: 100%;
+    resize: none;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    outline: 0;
+    border: 0;
+    margin-bottom: 5px;
+    color: #000000;
+    font-size: 14px;
+    cursor: pointer;
+}
