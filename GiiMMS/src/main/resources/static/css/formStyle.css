@@ -54,3 +54,37 @@ html {
     color: #000000;
     font-size: 20px;
 }
+
+.error:empty {
+    height: 0;
+    padding: 0;
+    width: 0;
+    margin: 0;
+}
+
+.error {
+    display: block;
+    width: 100%;
+    padding: 20px;
+    outline: 0;
+    border: 0;
+    background: #FFA07A;
+    font-size: 20px;
+}
+
+.message:empty {
+    height: 0;
+    padding: 0;
+    width: 0;
+    margin: 0;
+}
+
+.message {
+    display: block;
+    width: 100%;
+    padding: 20px;
+    outline: 0;
+    border: 0;
+    background: #ADD8E6;
+    font-size: 20px;
+}

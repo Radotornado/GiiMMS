@@ -5,21 +5,30 @@
     <title>Terminal</title>
 </head>
 <body>
-<div class="container">
-    <!-- todo: return styling -->
-    <form class="form" method="POST" th:action="@{/terminal}">
-        <h2 class="form-heading">Log in</h2>
+<div class="form">
+    <header class="formHeader">
+        <img th:src="@{/img/logo.png}" alt="logo" class="logo">
+        <h1>GiiMMS Terminal</h1>
+    </header>
 
-        <div class="form-group">
-            <span th:text="${message}"></span>
-            <input name="username" type="text" class="form-control" placeholder="Username"
+    <form class="loginForm" id="loginForm" method="POST"
+          th:action="@{/terminal}">
+        <span class="message" th:text="${message}"></span>
+        <div class="formGroup">
+            <input name="username" type="text" class="formInput"
+                   placeholder="Username"
                    autofocus="true"/>
-
-            <input name="password" type="password" class="form-control" placeholder="Password"/>
-            <span class="has-error" th:text="${error}"></span>
-
-            <button class="btn" type="submit">Log In</button>
         </div>
+
+        <div class="formGroup">
+            <input name="password" type="password" class="formInput"
+                   placeholder="Password"/>
+        </div>
+
+
+        <span class="error" th:text="${error}"></span>
+
+        <button class="btn" type="submit" name="loginbtn">Log In</button>
     </form>
 </div>
 <footer>
