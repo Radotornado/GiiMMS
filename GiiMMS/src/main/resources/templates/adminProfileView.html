@@ -11,7 +11,7 @@
     <div class="container">
         <header class="header">
             <img th:src="@{/img/logo.png}" alt="logo" class="logo">
-            <h1>Welcome <span th:text="${employee.firstName}"></span>!</h1>
+            <h1>Profile of <span th:text="${employee.firstName}"></span>:</h1>
         </header>
 
         <div class="data">
@@ -38,22 +38,18 @@
                     <text class="prefix">Availability:</text>
                         <input type="checkbox" checked>
                     </span><br/>
-
-                <div class="buttons">
                 <span class="entry">
                     <text class="prefix">Details about work:</text>
                     <textarea class="details" rows="4"></textarea>
                 </span><br/>
-                    <button class="btn">Submit</button> <!-- todo fix button -->
-
-                    <form id="logoutForm" method="POST" th:action="@{/logout}">
+                <div class="buttons">
+                    <form id="backForm" method="GET" th:action="@{/}">
                         <button class="btn"
-                                onclick="document.forms['logoutForm'].submit()">
-                            Logout
+                                onclick="document.forms['backForm'].submit()">
+                            Back to Admin Panel
                         </button>
                     </form>
                 </div>
-
             </div>
 
             <div class="right">

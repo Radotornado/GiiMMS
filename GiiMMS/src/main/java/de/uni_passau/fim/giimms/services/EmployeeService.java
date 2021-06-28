@@ -10,4 +10,5 @@ public interface EmployeeService {
     void save(Employee employee);
     void saveAll(Set<Employee> employees);
     Employee findByUsername(String username);
+    Employee findById(long id);
 }

@@ -1,6 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <link type="text/css" rel="stylesheet" th:href="@{/css/formStyle.css}">
+    <link type="text/css" rel="stylesheet" th:href="@{/css/terminalStyle.css}">
     <link rel="shortcut icon" type="image/png" th:href="@{/img/favicon.ico}"/>
     <title>Terminal</title>
 </head>
@@ -13,6 +13,7 @@
 
     <form class="loginForm" id="loginForm" method="POST"
           th:action="@{/terminal}">
+        <span class="error" th:text="${error}"></span>
         <span class="message" th:text="${message}"></span>
         <div class="formGroup">
             <input name="username" type="text" class="formInput"
@@ -24,9 +25,6 @@
             <input name="password" type="password" class="formInput"
                    placeholder="Password"/>
         </div>
-
-
-        <span class="error" th:text="${error}"></span>
 
         <button class="btn" type="submit" name="loginbtn">Log In</button>
     </form>

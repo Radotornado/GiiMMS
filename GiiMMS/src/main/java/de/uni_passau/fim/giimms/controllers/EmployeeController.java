@@ -7,9 +7,7 @@ import de.uni_passau.fim.giimms.services.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
@@ -24,33 +22,6 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeValidator employeeValidator;
-
-    @GetMapping("/addEmployee")
-    public String registration(Model model) {
-        if (securityService.isAuthenticated()) {
-            return "redirect:/";
-        }
-
-        model.addAttribute("employeeForm", new Employee());
-
-        return "addEmployee";
-    }
-
-    @PostMapping("/addEmployee")
-    public String registration(@ModelAttribute("employeeForm") Employee employeeForm, BindingResult bindingResult) {
-
-        employeeValidator.validate(employeeForm, bindingResult);
-
-        if (bindingResult.hasErrors()) {
-            return "addEmployee";
-        }
-
-        employeeService.save(employeeForm);
-
-        securityService.autoLogin(employeeForm.getUsername(), employeeForm.getPassword());
-
-        return "redirect:/employeePanel";
-    }
 
     @GetMapping("/terminal")
     @PostMapping("/terminal")

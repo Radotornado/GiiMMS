@@ -38,4 +38,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee findByUsername(String username) {
         return employeeRepository.findByUsername(username);
     }
+
+    @Override
+    public Employee findById(long id) {
+        return employeeRepository.getById(id);
+    }
 }

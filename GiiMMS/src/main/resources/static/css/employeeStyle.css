@@ -42,7 +42,7 @@ html {
 }
 
 #map {
-    height: 400px;
+    height: 100%;
     width: 100%;
 }
 
@@ -62,6 +62,8 @@ html {
     border: 0;
     background: #E0E0E0;
     font-size: 26px;
+    height: 50%;
+    position: relative;
 }
 
 h3 {
@@ -100,4 +102,10 @@ h3 {
     color: #000000;
     font-size: 14px;
     cursor: pointer;
+}
+
+.buttons {
+    position: absolute;
+    bottom: 15px;
+    width: 27%;
 }

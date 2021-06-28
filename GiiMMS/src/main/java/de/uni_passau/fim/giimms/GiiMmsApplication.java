@@ -24,14 +24,14 @@ public class GiiMmsApplication {
         //Logger log = LoggerFactory.getLogger(GiiMmsApplication.class);
         Coordinates testCoordinates1 = new Coordinates(48.566499, 13.4518444);
         Coordinates testCoordinates2 = new Coordinates(48.566349, 13.4511344);
-        Employee testEmployee1 = new Employee("hans", "123456", testCoordinates1, "Hans", "Gall", "Sysadmin");
-        Employee testEmployee2 = new Employee("flo", "654321", testCoordinates2, "Florian", "Berninger", "Software Engineer");
+        Employee testEmployee1 = new Employee("hans", "123456", testCoordinates1, "Hans", "Schiller", "Sysadmin");
+        Employee testEmployee2 = new Employee("flo", "654321", testCoordinates2, "Florian", "Schuster", "Software Engineer");
         Employee testEmployee3 = new Employee("nina", "nina123", testCoordinates2, "Nina", "Schmidt", "QA Tester");
         Set<Employee> employees = new HashSet<>();
         employees.add(testEmployee1);
         employees.add(testEmployee2);
         employees.add(testEmployee3);
-        Admin giimms = new Admin("giimms", "giimms", testCoordinates1, "Admin", "Admin", "CEO", employees);
+        Admin giimms = new Admin("giimms", "giimms", testCoordinates1, "Nicola", "Berninger", "CEO", employees);
         return (args) -> {
             employeeService.save(testEmployee1);
             employeeService.save(testEmployee2);
