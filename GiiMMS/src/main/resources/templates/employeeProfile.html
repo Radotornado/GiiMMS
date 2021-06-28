@@ -3,7 +3,6 @@
 <head>
     <link rel="shortcut icon" type="image/png" th:href="@{/img/favicon.ico}"/>
     <link type="text/css" rel="stylesheet" th:href="@{/css/employeeStyle.css}">
-    <script th:src="@{/js/map.js}"></script>
     <title>Employee page Template</title>
 </head>
 <body>
@@ -12,7 +11,7 @@
     <div class="container">
         <header class="header">
             <img th:src="@{/img/logo.png}" alt="logo" class="logo">
-            <h1>Welcome Hans!</h1> <!-- fixme: dummy data -->
+            <h1>Welcome <span th:text="${employee.firstName}"></span>!</h1>
         </header>
 
         <div class="data">
@@ -23,16 +22,16 @@
                 </span><br/>
                 <span class="entry">
                     <text class="prefix">Last name:</text>
-                    <!-- fixme: dummy data -->  Gall
+                    <span th:text="${employee.lastName}"></span>
                 </span><br/>
                 <span class="entry">
                     <text class="prefix">Position:</text>
-                    <!-- fixme: dummy data --> Sysadmin
+                    <span th:text="${employee.position}"></span>
                 </span><br/>
                 <span class="entry">
                     <text class="prefix">Time since login:</text>
                     <!-- fixme: dummy data -->
-                    <div id="timeElapsed"></div>
+                    <div id="timeElapsed" th:text="${employee.availableTimeStart}"></div>
                 </span>
                 <span class="entry">
                     <text class="prefix">Availability:</text>
@@ -53,23 +52,22 @@
             </div>
 
             <div class="right">
-                <div id="map">48.5656715, 13.4337966
-                    <!-- fixme: dummy data --></div>
+                <div id="map">
+                    <span th:text="${employee.coordinates}"></span>
+                </div>
                 <script
                         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAr08bWCmHTZIi1j6pWWYLA3hso28Bn2YU&callback=initMap&libraries=&v=weekly"
                         async
                 ></script>
-
             </div>
-
-
         </div>
-
-
     </div>
 </div>
 <footer>
     <div th:include="fragments/copyright"></div>
 </footer>
+
+<script th:src="@{/js/map.js}"></script>
+<script th:src="@{/js/time.js}"></script>
 </body>
 </html>

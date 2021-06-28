@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.security.Principal;
+
 @Controller
 public class EmployeeController {
     @Autowired
@@ -50,7 +52,8 @@ public class EmployeeController {
     }
 
     @GetMapping("/terminal")
-    public String login(Model model, String error, String logout) {
+    @PostMapping("/terminal")
+    public String terminal(Model model, String error, String logout) {
 
         if (securityService.isAuthenticated()) {
             return "redirect:/employeeProfile";
@@ -65,9 +68,11 @@ public class EmployeeController {
         return "/terminal";
     }
 
-    @GetMapping({"/employeeProfile", "/"})
-    public String welcome(Model model) {
-        return "employeeProfile";
+    @GetMapping("/")
+    public String welcome(Model model, Principal principal) {
+        Employee employee = employeeService.findByUsername(principal.getName());
+        model.addAttribute("employee", employee);
+        return "/employeeProfile";
     }
 }
 

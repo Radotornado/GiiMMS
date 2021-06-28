@@ -1,5 +1,6 @@
 package de.uni_passau.fim.giimms.services;
 
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class SecurityServiceImpl implements SecurityService {
 
     @Autowired
@@ -35,7 +37,6 @@ public class SecurityServiceImpl implements SecurityService {
     @Override
     public void autoLogin(String username, String password) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-        // I think the error was here ^ UserDetails cannot find by email
         UsernamePasswordAuthenticationToken token
                 = new UsernamePasswordAuthenticationToken(userDetails, password,
                 userDetails.getAuthorities());
