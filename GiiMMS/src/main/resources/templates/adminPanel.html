@@ -1,0 +1,75 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/adminStyle.css}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <title>Admin panel</title>
+</head>
+<body>
+<div sec:authorize="isAuthenticated()">
+    <div class="container">
+        <header class="header">
+            <img th:src="@{/img/logo.png}" alt="logo" class="logo">
+            <h1>Welcome <span th:text="${admin.firstName}"></span>!</h1>
+        </header>
+
+        <div class="data">
+            <div class="left">
+                <span class="entry">
+                    <text class="prefix">Username :</text>
+                    <span th:text="${#authentication.name}"></span>
+                </span><br/>
+                <span class="entry">
+                    <text class="prefix">Name:</text>
+                    <span th:text="${admin.getNames()}"></span>
+                </span><br/>
+                <span class="entry">
+                    <text class="prefix">Position:</text>
+                    <span th:text="${admin.position}"></span>
+                </span><br/>
+                <div class="logout">
+                    <form id="logoutForm" method="POST" th:action="@{/logout}"/>
+                    <button class="btn"
+                            onclick="document.forms['logoutForm'].submit()">
+                        Logout
+                    </button>
+                </div>
+            </div>
+            <div class="right">
+                <div class="tableHeader">
+                    <table cellpadding="0" cellspacing="0" border="0">
+                        <tr>
+                            <th>Username</th>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Is Available</th>
+                            <th>Profile</th>
+                        </tr>
+                    </table>
+                </div>
+                <div class="tableContent">
+                    <table cellpadding="0" cellspacing="0" border="0">
+                        <tr th:each="employee : ${admin.employees}">
+                            <td th:text="${employee.username}"></td>
+                            <td th:text="${employee.getNames()}"></td>
+                            <td th:text="${employee.position}"></td>
+                            <td th:text="${employee.isAvailable} ? yes : no"></td>
+                            <td>
+                                <button class="profileBtn">Profile</button>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+<footer>
+    <div th:include="fragments/copyright"></div>
+</footer>
+</body>
+</html>

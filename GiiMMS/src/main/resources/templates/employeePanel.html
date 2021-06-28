@@ -3,7 +3,7 @@
 <head>
     <link rel="shortcut icon" type="image/png" th:href="@{/img/favicon.ico}"/>
     <link type="text/css" rel="stylesheet" th:href="@{/css/employeeStyle.css}">
-    <title>Employee page Template</title>
+    <title>Employee panel</title>
 </head>
 <body>
 
@@ -21,8 +21,8 @@
                     <span th:text="${#authentication.name}"></span>
                 </span><br/>
                 <span class="entry">
-                    <text class="prefix">Last name:</text>
-                    <span th:text="${employee.lastName}"></span>
+                    <text class="prefix">Name:</text>
+                    <span th:text="${employee.getNames()}"></span>
                 </span><br/>
                 <span class="entry">
                     <text class="prefix">Position:</text>

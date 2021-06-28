@@ -1,5 +1,6 @@
 package de.uni_passau.fim.giimms.controllers;
 
+import de.uni_passau.fim.giimms.model.Admin;
 import de.uni_passau.fim.giimms.model.Employee;
 import de.uni_passau.fim.giimms.services.EmployeeService;
 import de.uni_passau.fim.giimms.services.SecurityService;
@@ -48,7 +49,7 @@ public class EmployeeController {
 
         securityService.autoLogin(employeeForm.getUsername(), employeeForm.getPassword());
 
-        return "redirect:/employeeProfile";
+        return "redirect:/employeePanel";
     }
 
     @GetMapping("/terminal")
@@ -56,7 +57,7 @@ public class EmployeeController {
     public String terminal(Model model, String error, String logout) {
 
         if (securityService.isAuthenticated()) {
-            return "redirect:/employeeProfile";
+            return "redirect:/";
         }
 
         if (error != null)
@@ -69,10 +70,16 @@ public class EmployeeController {
     }
 
     @GetMapping("/")
-    public String welcome(Model model, Principal principal) {
+    public String loggedIn(Model model, Principal principal) {
         Employee employee = employeeService.findByUsername(principal.getName());
+        if (employee.isAdmin()) {
+            Admin admin = (Admin) employeeService.findByUsername(principal.getName());
+            model.addAttribute("admin", admin);
+
+            return "adminPanel";
+        }
         model.addAttribute("employee", employee);
-        return "/employeeProfile";
+        return "employeePanel";
     }
 }
 

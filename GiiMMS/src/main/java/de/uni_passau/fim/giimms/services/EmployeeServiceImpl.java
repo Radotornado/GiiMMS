@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -24,6 +25,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setPassword(passEncoder.encode(employee.getPassword()));
         employee.setRoles(new HashSet<>(roleRepository.findAll()));
         employeeRepository.save(employee);
+    }
+
+    @Override
+    public void saveAll(Set<Employee> employees) {
+        for (Employee employee : employees) {
+            employeeRepository.save(employee);
+        }
     }
 
     @Override

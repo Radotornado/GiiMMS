@@ -29,32 +29,33 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
-    private long id;
+    protected long id;
     @Column(name = "username", unique = true, nullable = false)
-    private String username;
+    protected String username;
     @Column(name = "password", nullable = false)
-    private String password; // TODO: the OTP functionality
+    protected String password; // TODO: the OTP functionality
     @Embedded
     @Column(name = "coordinates")
-    private Coordinates coordinates; // TODO: get them automatically
+    protected Coordinates coordinates; // TODO: get them automatically
     @Column(name = "firstName", nullable = false)
-    private String firstName;
+    protected String firstName;
     @Column(name = "lastName", nullable = false)
-    private String lastName;
+    protected String lastName;
     @Column(name = "position", nullable = false)
-    private String position;
+    protected String position;
     @Column(name = "availableTimeStart")
-    private long availableTimeStart;
+    protected long availableTimeStart;
     @Column(name = "availableTimeEnd")
-    private long availableTimeEnd;
+    protected long availableTimeEnd;
     @Column(name = "status")
-    private boolean status;
+    protected boolean status;
     @Column(name = "isAvailable")
-    private boolean isAvailable;
+    protected boolean isAvailable;
+    @Column(name = "isAdmin")
+    protected boolean isAdmin;
 
     @ManyToMany
     private Set<Role> roles;
-
 
     public Employee(String username, String password, Coordinates coordinates,
                     String firstName, String lastName, String position) {
@@ -64,9 +65,10 @@ public class Employee {
         this.firstName = firstName;
         this.lastName = lastName;
         this.position = position;
-        this.status = true;
-        this.isAvailable = true;
+        this.status = false;
+        this.isAvailable = false;
         this.availableTimeStart = System.currentTimeMillis();
+        this.isAdmin = false;
     }
 
     private void stopTimer() {
@@ -89,6 +91,11 @@ public class Employee {
                 ", availableTimeEnd=" + availableTimeEnd +
                 ", status=" + status +
                 ", isAvailable=" + isAvailable +
+                ", isAdmin=" + isAdmin +
                 '}';
+    }
+
+    public String getNames() {
+        return firstName + " " + lastName;
     }
 }

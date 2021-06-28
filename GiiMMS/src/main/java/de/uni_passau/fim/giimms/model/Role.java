@@ -1,5 +1,8 @@
 package de.uni_passau.fim.giimms.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,6 +12,8 @@ import javax.persistence.Table;
 import java.util.Set;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "role")
 public class Role {
     @Id
@@ -19,28 +24,4 @@ public class Role {
 
     @ManyToMany(mappedBy = "roles")
     private Set<Employee> employees;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Set<Employee> getUsers() {
-        return employees;
-    }
-
-    public void setUsers(Set<Employee> employees) {
-        this.employees = employees;
-    }
 }
