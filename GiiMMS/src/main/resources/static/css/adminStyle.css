@@ -119,7 +119,7 @@ td {
     cursor: pointer;
 }
 
-.logout {
+.buttons {
     position: absolute;
     bottom: 15px;
     width: 27%;

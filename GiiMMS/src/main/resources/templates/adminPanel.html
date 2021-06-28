@@ -28,12 +28,20 @@
                     <text class="prefix">Position:</text>
                     <span th:text="${admin.position}"></span>
                 </span><br/>
-                <div class="logout">
-                    <form id="logoutForm" method="POST" th:action="@{/logout}"/>
-                    <button class="btn"
-                            onclick="document.forms['logoutForm'].submit()">
-                        Logout
-                    </button>
+                <div class="buttons">
+                    <form id="addEmployeeForm" method="GET"
+                          th:action="@{/addEmployee}">
+                        <button class="btn"
+                                onclick="document.forms['addEmployeeForm'].submit()">
+                            Add a new Employee
+                        </button>
+                    </form>
+                    <form id="logoutForm" method="POST" th:action="@{/logout}">
+                        <button class="btn"
+                                onclick="document.forms['logoutForm'].submit()">
+                            Logout
+                        </button>
+                    </form>
                 </div>
             </div>
             <div class="right">
@@ -56,7 +64,9 @@
                             <td th:text="${employee.position}"></td>
                             <td th:text="${employee.isAvailable} ? yes : no"></td>
                             <td>
-                                <button class="profileBtn">Profile</button>
+                                <a th:href="@{/adminProfileView/{id}(id=${employee.id})}">
+                                    <button class="profileBtn">Profile</button>
+                                </a>
                             </td>
                         </tr>
 
