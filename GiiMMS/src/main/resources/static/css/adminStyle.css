@@ -1,26 +1,126 @@
-#button1 {
-    cursor: pointer;
-    border: none;
-    height: 40px;
-    width: 40px;
-    text-decoration: none;
-    display: inline-block;
-    position: fixed;
-    top: 1.25rem;
-    right: 1.25rem;
-    background-size: cover;
-}
-
-table, th, td {
-    border: 1px solid black;
-}
-
-#ProfileCol1, #ProfileCol2, #ProfileCol3 {
-    border: 0;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", serif;
 }
 
 html {
     background: linear-gradient(45deg, #49C49D 20%, #A2B7E5 80%);
     height: 100%;
     overflow: hidden;
+}
+
+.container {
+    width: 90%;
+    max-width: 1300px;
+    margin: 5vh auto 10vh auto;
+    color: #000000;
+}
+
+.header {
+    text-align: center;
+    font-size: 24px;
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+
+.left {
+    width: 30%;
+    float: left;
+    padding-right: 10px;
+}
+
+.right {
+    width: 70%;
+    float: right;
+}
+
+.data {
+    margin-top: 40px;
+    border-radius: 6px;
+    overflow: hidden;
+    display: block;
+    width: 100%;
+    padding: 20px;
+    outline: 0;
+    border: 0;
+    background: #E0E0E0;
+    font-size: 26px;
+    height: 50%;
+    position: relative;
+}
+
+h3 {
+    margin-top: 15px;
+}
+
+.entry {
+    padding-top: 5px;
+    font-size: 20px;
+    display: contents;
+}
+
+table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.tableHeader {
+    background: linear-gradient(45deg, rgba(73, 196, 157, 0.5) 20%, rgba(162, 183, 229, 0.5) 80%);
+}
+
+.tableContent {
+    background: linear-gradient(45deg, rgba(73, 196, 157, 0.3) 20%, rgba(162, 183, 229, 0.3) 80%);
+    height: 87%;
+    overflow-x: auto;
+    margin-top: 0;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+th {
+    padding: 20px 15px;
+    text-align: center;
+    font-size: 16px;
+}
+
+td {
+    padding: 7px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 16px;
+    border-bottom: solid 1px rgba(255, 255, 255, 0.1);
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    outline: 0;
+    border: 0;
+    margin-bottom: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.profileBtn {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    outline: 0;
+    border: 0;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.logout {
+    position: absolute;
+    bottom: 15px;
+    width: 27%;
 }
