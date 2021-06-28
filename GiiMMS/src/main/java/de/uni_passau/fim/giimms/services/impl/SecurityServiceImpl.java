@@ -1,5 +1,6 @@
-package de.uni_passau.fim.giimms.services;
+package de.uni_passau.fim.giimms.services.impl;
 
+import de.uni_passau.fim.giimms.services.SecurityService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

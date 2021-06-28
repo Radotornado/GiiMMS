@@ -46,6 +46,25 @@
                 </span><br/>
                     <button class="btn">Submit</button> <!-- todo fix button -->
 
+                    <div class="exportLeft">
+                        <form id="exportJSONForm" method="GET"
+                              th:action="@{/exportJSON/{id}(id=${employee.id})}">
+                            <button class="btn"
+                                    onclick="document.forms['exportJSONForm'].submit()">
+                                Export Data as JSON
+                            </button>
+                        </form>
+                    </div>
+                    <div class="exportRight">
+                        <form id="exportHTMLForm" method="GET"
+                              th:action="@{/exportHTML/{id}(id=${employee.id})}">
+                            <button class="btn"
+                                    onclick="document.forms['exportHTMLForm'].submit()">
+                                Export Data as HTML
+                            </button>
+                        </form>
+                    </div>
+
                     <form id="logoutForm" method="POST" th:action="@{/logout}">
                         <button class="btn"
                                 onclick="document.forms['logoutForm'].submit()">

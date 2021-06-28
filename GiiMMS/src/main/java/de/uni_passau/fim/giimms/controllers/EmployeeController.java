@@ -3,11 +3,16 @@ package de.uni_passau.fim.giimms.controllers;
 import de.uni_passau.fim.giimms.model.Admin;
 import de.uni_passau.fim.giimms.model.Employee;
 import de.uni_passau.fim.giimms.services.EmployeeService;
+import de.uni_passau.fim.giimms.services.JsonExporterService;
 import de.uni_passau.fim.giimms.services.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
@@ -21,7 +26,7 @@ public class EmployeeController {
     private SecurityService securityService;
 
     @Autowired
-    private EmployeeValidator employeeValidator;
+    private JsonExporterService jsonExporter;
 
     @GetMapping("/terminal")
     @PostMapping("/terminal")
@@ -52,5 +57,19 @@ public class EmployeeController {
         model.addAttribute("employee", employee);
         return "employeePanel";
     }
+
+    @GetMapping("/exportJSON/{id:[1-9]+[0-9]*}")
+    public ResponseEntity<byte[]> exportJSON(@PathVariable("id") Long id) {
+        Employee employee = employeeService.findById(id);
+        String employeeJSON = jsonExporter.export(employee);
+        byte[] employeeJSONBytes = employeeJSON.getBytes();
+        return ResponseEntity
+                .ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + employee.getUsername() + ".json")
+                .contentType(MediaType.APPLICATION_JSON)
+                .contentLength(employeeJSONBytes.length)
+                .body(employeeJSONBytes);
+    }
+
 }
 

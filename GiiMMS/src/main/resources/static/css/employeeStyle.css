@@ -41,6 +41,17 @@ html {
     float: right;
 }
 
+.exportLeft {
+    width: 50%;
+    float: left;
+    padding-right: 10px;
+}
+
+.exportRight {
+    width: 50%;
+    float: right;
+}
+
 #map {
     height: 100%;
     width: 100%;
