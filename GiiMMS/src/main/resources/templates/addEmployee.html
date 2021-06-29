@@ -35,6 +35,37 @@
                     </button>
                 </form>
             -->
+            <form id="form" class="form">
+            <div id="form-control">
+            <input id="firstName"  placeholder="First Name">
+                <small>Error Message</small>
+            </div>
+                <div id="form-control">
+            <input id="lastName" type="lastName"  placeholder="Last Name">
+                <small>Error Message</small>
+        </div>
+                <div id="form-control">
+            <input id="email" type="email" placeholder="Email">
+                    <small>Error Message</small>
+                </div>
+                <div id="form-control">
+                    <small>Error Message</small>
+                </div>
+                <div id="form-control">
+                    <input id="password" type="password"  placeholder="Password">
+                         <small>Error Message</small>
+                </div>
+                 <div id="form-control">
+                    <input id="position" type="Position"  placeholder="Position">
+                        <small>Error Message</small>
+                </div>
+    </div>
+            <div class="button-container">
+                <button class="btn" type="delete">Delete</button>
+                <button class="btn" type="submit">Submit</button>
+
+            </div>
+            </form>
         </div>
     </div>
 </div>
@@ -42,4 +73,5 @@
     <div th:include="fragments/copyright"></div>
 </footer>
 </body>
+<script th:src="@{/js/Inputvalidation.js}"></script>
 </html>

@@ -1,7 +1,7 @@
 const form = document.getElementById('form');
 const firstName= document.getElementById('firstName');
 const email = document.getElementById('email');
-const Password = document.getElementById('Password');
+const password = document.getElementById('password');
 const lastName = document.getElementById('lastName');
 const Position = document.getElementById('position');
 
@@ -15,9 +15,9 @@ function checkInputs() {
 	// trim to remove the whitespaces
 	const firstNameValue = firstName.value.trim();
 	const emailValue = email.value.trim();
-	const PasswordValue = Password.value.trim('Password');
-	const lastNameValue =lastName.value.trim('lastName');
-	const Position = position.value.trim('position');
+	const PasswordValue = password.value.trim();
+	const lastNameValue =lastName.value.trim();
+	const Position = position.value.trim();
 
 	if(firstNameValue === '') {
 		setErrorFor(firstName, 'Firstname cannot be blank');
@@ -34,7 +34,7 @@ function checkInputs() {
 	}
 	
 	if(PasswordValue === '') {
-		setErrorFor(PasswordValue, 'Password cannot be blank');
+		setErrorFor(password, 'Password cannot be blank');
 	} else {
 		setSuccessFor(Password);
 	}
@@ -46,7 +46,7 @@ function checkInputs() {
 	}
 	
 	if(Position === '') {
-		setErrorFor(Position, 'Position cannot be blank');
+		setErrorFor(position, 'Position cannot be blank');
 	} else {
 		setSuccessFor(Position);
 	}

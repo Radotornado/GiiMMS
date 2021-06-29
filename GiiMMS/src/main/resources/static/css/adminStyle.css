@@ -124,3 +124,28 @@ td {
     bottom: 15px;
     width: 27%;
 }
+input {
+padding:5px;
+text-align:left;
+vertical-align:middle;
+display:block;
+margin:0px;
+margin-left:auto;
+margin-right:auto;
+}
+.button-container {
+text-align:center;
+
+}
+ small {
+	color: #e74c3c;
+	visibility: hidden;
+
+}
+.form-control.error small {
+	visibility: visible;
+
+}
+.form-control input {
+	text.align:center;
+}
