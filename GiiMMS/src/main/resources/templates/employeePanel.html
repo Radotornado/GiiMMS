@@ -42,9 +42,12 @@
                 <div class="buttons">
                 <span class="entry">
                     <text class="prefix">Details about work:</text>
-                    <textarea class="details" name="details" rows="4" form="addDataForm" th:value="*{employee.data}"></textarea>
+                    <textarea class="details" name="details" rows="4"
+                              form="addDataForm"
+                              th:value="*{employee.data}"></textarea>
                 </span><br/>
-                    <form id="addDataForm" enctype="multipart/form-data" method="POST" th:action="@{/}">
+                    <form id="addDataForm" enctype="multipart/form-data"
+                          method="POST" th:action="@{/}">
                         <button class="btn" name="action"
                                 onclick="document.forms['addDataForm'].submit()">
                             Submit
@@ -84,10 +87,11 @@
                 <div id="map">
                     <span th:text="${employee.coordinates}"></span>
                 </div>
-                <script
-                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAr08bWCmHTZIi1j6pWWYLA3hso28Bn2YU&callback=initMap&libraries=&v=weekly"
-                        async
-                ></script>
+                    <script
+                            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAr08bWCmHTZIi1j6pWWYLA3hso28Bn2YU&callback=initMap&libraries=&v=weekly"
+                            async
+                    >
+                    </script>
             </div>
         </div>
     </div>
@@ -95,7 +99,6 @@
 <footer>
     <div th:include="fragments/copyright"></div>
 </footer>
-
 <script th:src="@{/js/map.js}"></script>
 <script th:src="@{/js/time.js}"></script>
 </body>
