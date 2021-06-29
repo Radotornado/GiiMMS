@@ -1,5 +1,6 @@
 package de.uni_passau.fim.giimms.services.impl;
 
+import de.uni_passau.fim.giimms.model.Admin;
 import de.uni_passau.fim.giimms.model.Employee;
 import de.uni_passau.fim.giimms.repositories.EmployeeRepository;
 import de.uni_passau.fim.giimms.repositories.RoleRepository;
@@ -9,7 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -29,7 +30,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void saveAll(Set<Employee> employees) {
+    public void saveAll(List<Employee> employees) {
         for (Employee employee : employees) {
             employeeRepository.save(employee);
         }
@@ -43,5 +44,20 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee findById(long id) {
         return employeeRepository.getById(id);
+    }
+
+    @Override
+    public void delete(String username) {
+        employeeRepository.delete(employeeRepository.findByUsername(username));
+    }
+
+    @Override
+    public void update(Admin admin) {
+        List<Employee> employees = employeeRepository.findAll();
+        employees.removeIf(Employee::isAdmin);
+        admin.setEmployees(employees);
+        admin.setPassword(passEncoder.encode(admin.getPassword()));
+        admin.setRoles(new HashSet<>(roleRepository.findAll()));
+        employeeRepository.save(admin);
     }
 }

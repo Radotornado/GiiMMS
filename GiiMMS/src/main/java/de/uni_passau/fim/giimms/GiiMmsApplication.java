@@ -9,8 +9,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 public class GiiMmsApplication {
@@ -27,7 +27,7 @@ public class GiiMmsApplication {
         Employee testEmployee1 = new Employee("hans", "123456", testCoordinates1, "Hans", "Schiller", "Sysadmin");
         Employee testEmployee2 = new Employee("flo", "654321", testCoordinates2, "Florian", "Schuster", "Software Engineer");
         Employee testEmployee3 = new Employee("nina", "nina123", testCoordinates2, "Nina", "Schmidt", "QA Tester");
-        Set<Employee> employees = new HashSet<>();
+        List<Employee> employees = new ArrayList<>();
         employees.add(testEmployee1);
         employees.add(testEmployee2);
         employees.add(testEmployee3);
@@ -36,7 +36,7 @@ public class GiiMmsApplication {
             employeeService.save(testEmployee1);
             employeeService.save(testEmployee2);
             employeeService.save(testEmployee3);
-            employeeService.save(giimms);
+            employeeService.update(giimms);
             employeeService.saveAll(employees);
         };
     }

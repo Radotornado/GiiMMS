@@ -6,11 +6,11 @@ import de.uni_passau.fim.giimms.services.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 public class AdminController {
@@ -19,9 +19,6 @@ public class AdminController {
 
     @Autowired
     private SecurityService securityService;
-
-    @Autowired
-    private EmployeeValidator employeeValidator;
 
     @GetMapping("/addEmployee")
     public String registration(Model model) {
@@ -35,19 +32,16 @@ public class AdminController {
     }
 
     @PostMapping("/addEmployee")
-    public String registration(@ModelAttribute("employeeForm") Employee employeeForm, BindingResult bindingResult) {
+    public String registration(@RequestParam("username") String username,
+                               @RequestParam("firstName") String firstName,
+                               @RequestParam("lastName") String lastName,
+                               @RequestParam("password") String password,
+                               @RequestParam("position") String position) {
 
-        employeeValidator.validate(employeeForm, bindingResult);
-
-        if (bindingResult.hasErrors()) {
-            return "addEmployee";
-        }
-
-        employeeService.save(employeeForm);
-
-        securityService.autoLogin(employeeForm.getUsername(), employeeForm.getPassword());
-
-        return "redirect:/employeePanel";
+        Employee employee = new Employee(username, password, firstName,
+                lastName, position);
+        employeeService.save(employee);
+        return "redirect:/";
     }
 
     @GetMapping("/adminProfileView/{id:[1-9]+[0-9]*}")

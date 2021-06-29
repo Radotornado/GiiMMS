@@ -53,6 +53,8 @@ public class Employee {
     protected boolean isAvailable;
     @Column(name = "isAdmin")
     protected boolean isAdmin;
+    @Column(name = "data")
+    protected String data;
 
     @ManyToMany
     private Set<Role> roles;
@@ -62,6 +64,20 @@ public class Employee {
         this.username = username;
         this.password = password;
         this.coordinates = coordinates;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.position = position;
+        this.status = false;
+        this.isAvailable = false;
+        this.availableTimeStart = System.currentTimeMillis();
+        this.isAdmin = false;
+    }
+
+    public Employee(String username, String password,
+                    String firstName, String lastName, String position) {
+        this.username = username;
+        this.password = password;
+        this.coordinates = null;
         this.firstName = firstName;
         this.lastName = lastName;
         this.position = position;
@@ -83,15 +99,16 @@ public class Employee {
 
     public String toJson() {
         return "Employee{"
-                + "id: "+ id
-                + ", username: "+ username
-                + ", firstName: "+ firstName
-                + ", lastName: "+ lastName
-                + ", position: "+ position
-                + ", availability: "+ isAvailable
-                + ", latitude: "+ coordinates.getLatitude()
-                + ", longitude: "+ coordinates.getLongitude()
-                + ", status: "+ status
+                + "id: " + id
+                + ", username: " + username
+                + ", firstName: " + firstName
+                + ", lastName: " + lastName
+                + ", position: " + position
+                + ", availability: " + isAvailable
+                + ", latitude: " + coordinates.getLatitude()
+                + ", longitude: " + coordinates.getLongitude()
+                + ", status: " + status
+                + ", data:" + data
                 + "}";
     }
 }

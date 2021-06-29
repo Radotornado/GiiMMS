@@ -8,7 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
-import java.util.Set;
+import java.util.List;
 
 @Getter
 @Setter
@@ -18,11 +18,11 @@ import java.util.Set;
 public class Admin extends Employee {
 
     @ManyToMany
-    private Set<Employee> employees;
+    private List<Employee> employees;
 
     public Admin(String username, String password, Coordinates coordinates,
                  String firstName, String lastName, String position,
-                 Set<Employee> employees) {
+                 List<Employee> employees) {
         this.username = username;
         this.password = password;
         this.coordinates = coordinates;

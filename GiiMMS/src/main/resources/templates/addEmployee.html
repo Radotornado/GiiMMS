@@ -1,77 +1,76 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-    <link type="text/css" rel="stylesheet" th:href="@{/css/adminStyle.css}">
+    <link type="text/css" rel="stylesheet" th:href="@{/css/terminalStyle.css}">
+    <link rel="shortcut icon" type="image/png" th:href="@{/img/favicon.ico}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Create a new Employee</title>
 </head>
 <body>
-<div sec:authorize="isAuthenticated()">
-    <div class="container">
-        <header class="header">
-            <img th:src="@{/img/logo.png}" alt="logo" class="logo">
-            <h1>Add a new Employee!</h1>
-        </header>
+<div class="form">
+    <div sec:authorize="isAuthenticated()">
+        <div class="container">
+            <header class="formHeader">
+                <img th:src="@{/img/logo.png}" alt="logo" class="logo">
+                <h1>Add a new Employee:</h1>
+            </header>
 
-        <div class="data">
-            <!-- TODO: all fields -->
-            <!-- a form with: username, password, firstName, lastName and position -->
-            <!--
-                use this: (do not change values, only the button class
-
-                <form id="employeeForm" class="loginForm" method="POST" th:action="@{/addEmployee}">
-
-                    du solltest z.B.:
+            <div class="data">
+                <form id="addEmployeeForm" class="addForm" method="POST"
+                      th:action="@{/addEmployee}">
                     <div class="formGroup">
                         <input name="username" type="text" class="formInput"
-                        placeholder="Username"
-                        autofocus="true"/>
+                               placeholder="Username"
+                               autofocus="true" id="username"/>
+                        <small>Error Message</small>
                     </div>
-                    machen und es klappt ok
-
-                    <button class="btn"
-                            onclick="document.forms['employeeForm'].submit()">
-                        Add
+                    <div class="formGroup">
+                        <input name="password" type="password" class="formInput"
+                               placeholder="Password" id="password"/>
+                        <small>Error Message</small>
+                    </div>
+                    <div class="formGroup">
+                        <input name="firstName" type="text" class="formInput"
+                               placeholder="First Name" id="firstName"/>
+                        <small>Error Message</small>
+                    </div>
+                    <div class="formGroup">
+                        <input name="lastName" type="text" class="formInput"
+                               placeholder="Last Name" id="lastName"/>
+                        <small>Error Message</small>
+                    </div>
+                    <div class="formGroup">
+                        <input name="position" type="text" class="formInput"
+                               placeholder="Position" id="position"/>
+                        <small>Error Message</small>
+                    </div>
+                    <button class="btn" style="border-bottom: #d2d2d2 1px solid"
+                            onclick="document.forms['addEmployeeForm'].submit()">
+                        Add new Employee
                     </button>
                 </form>
-            -->
-            <form id="form" class="form">
-            <div id="form-control">
-            <input id="firstName"  placeholder="First Name">
-                <small>Error Message</small>
+                <div class="buttons">
+                    <form id="clearForm" method="GET"
+                          th:action="@{/addEmployee}">
+                        <button class="btn"
+                                style="border-bottom: #d2d2d2 1px solid"
+                                onclick="document.forms['clearForm'].submit()">
+                            Clear fields
+                        </button>
+                    </form>
+                    <form id="backForm" method="GET" th:action="@{/terminal}">
+                        <button class="btn"
+                                onclick="document.forms['backForm'].submit()">
+                            Back to Admin Panel
+                        </button>
+                    </form>
+                </div>
             </div>
-                <div id="form-control">
-            <input id="lastName" type="lastName"  placeholder="Last Name">
-                <small>Error Message</small>
-        </div>
-                <div id="form-control">
-            <input id="email" type="email" placeholder="Email">
-                    <small>Error Message</small>
-                </div>
-                <div id="form-control">
-                    <small>Error Message</small>
-                </div>
-                <div id="form-control">
-                    <input id="password" type="password"  placeholder="Password">
-                         <small>Error Message</small>
-                </div>
-                 <div id="form-control">
-                    <input id="position" type="Position"  placeholder="Position">
-                        <small>Error Message</small>
-                </div>
-    </div>
-            <div class="button-container">
-                <button class="btn" type="delete">Delete</button>
-                <button class="btn" type="submit">Submit</button>
-
-            </div>
-            </form>
         </div>
     </div>
-</div>
-<footer>
-    <div th:include="fragments/copyright"></div>
-</footer>
+    <footer>
+        <div th:include="fragments/copyright"></div>
+    </footer>
 </body>
-<script th:src="@{/js/Inputvalidation.js}"></script>
+<script th:src="@{/js/inputvalidation.js}"></script>
 </html>

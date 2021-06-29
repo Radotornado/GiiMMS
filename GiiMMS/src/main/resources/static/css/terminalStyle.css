@@ -35,6 +35,19 @@ html {
     overflow: hidden;
 }
 
+.addForm {
+    margin-top: 40px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    overflow: hidden;
+}
+
+.buttons{
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    overflow: hidden;
+}
+
 .formInput {
     display: block;
     width: 100%;
@@ -87,4 +100,10 @@ html {
     border: 0;
     background: #ADD8E6;
     font-size: 20px;
+}
+
+small {
+    color: #e74c3c;
+    visibility: hidden;
+    position: absolute;
 }

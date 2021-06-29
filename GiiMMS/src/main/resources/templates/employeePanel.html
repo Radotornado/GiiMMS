@@ -42,9 +42,14 @@
                 <div class="buttons">
                 <span class="entry">
                     <text class="prefix">Details about work:</text>
-                    <textarea class="details" rows="4"></textarea>
+                    <textarea class="details" name="details" rows="4" form="addDataForm" th:value="*{employee.data}"></textarea>
                 </span><br/>
-                    <button class="btn">Submit</button> <!-- todo fix button -->
+                    <form id="addDataForm" enctype="multipart/form-data" method="POST" th:action="@{/}">
+                        <button class="btn" name="action"
+                                onclick="document.forms['addDataForm'].submit()">
+                            Submit
+                        </button>
+                    </form>
 
                     <div class="exportLeft">
                         <form id="exportJSONForm" method="GET"
