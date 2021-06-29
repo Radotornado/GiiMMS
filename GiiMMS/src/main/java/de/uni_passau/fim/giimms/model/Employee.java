@@ -77,25 +77,21 @@ public class Employee {
         }
     }
 
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", email='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", coordinates=" + coordinates +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", position='" + position + '\'' +
-                ", availableTimeStart=" + availableTimeStart +
-                ", availableTimeEnd=" + availableTimeEnd +
-                ", status=" + status +
-                ", isAvailable=" + isAvailable +
-                ", isAdmin=" + isAdmin +
-                '}';
-    }
-
     public String getNames() {
         return firstName + " " + lastName;
+    }
+
+    public String toJson() {
+        return "Employee{"
+                + "id: "+ id
+                + ", username: "+ username
+                + ", firstName: "+ firstName
+                + ", lastName: "+ lastName
+                + ", position: "+ position
+                + ", availability: "+ isAvailable
+                + ", latitude: "+ coordinates.getLatitude()
+                + ", longitude: "+ coordinates.getLongitude()
+                + ", status: "+ status
+                + "}";
     }
 }

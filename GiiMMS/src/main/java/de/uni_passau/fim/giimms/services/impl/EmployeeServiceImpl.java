@@ -1,8 +1,9 @@
-package de.uni_passau.fim.giimms.services;
+package de.uni_passau.fim.giimms.services.impl;
 
 import de.uni_passau.fim.giimms.model.Employee;
 import de.uni_passau.fim.giimms.repositories.EmployeeRepository;
 import de.uni_passau.fim.giimms.repositories.RoleRepository;
+import de.uni_passau.fim.giimms.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

@@ -19,11 +19,21 @@
             <!--
                 use this: (do not change values, only the button class
 
-                <form id="employeeForm" method="POST" th:action="@{/addEmployee}"/>
+                <form id="employeeForm" class="loginForm" method="POST" th:action="@{/addEmployee}">
+
+                    du solltest z.B.:
+                    <div class="formGroup">
+                        <input name="username" type="text" class="formInput"
+                        placeholder="Username"
+                        autofocus="true"/>
+                    </div>
+                    machen und es klappt ok
+
                     <button class="btn"
                             onclick="document.forms['employeeForm'].submit()">
                         Add
                     </button>
+                </form>
             -->
         </div>
     </div>
