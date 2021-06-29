@@ -3,33 +3,24 @@ const firstName = document.getElementById('firstName');
 const lastName = document.getElementById('lastName');
 const password = document.getElementById('password');
 const position = document.getElementById('position');
+const username = document.getElementById('username');
 
-form.addEventListener('submit', e => {
-    e.preventDefault();
-    checkInputs();
-});
 
-function checkInputs() {
+
+function validateForm() {
     // trim to remove the whitespaces
-    alert(position.value);
     const firstNameValue = firstName.value.trim();
     const lastNameValue = lastName.value.trim();
     const passwordValue = password.value.trim();
-    const position = position.value.trim();
-    const username = position.value.trim();
+    const positionValue = position.value.trim();
+    const usernameValue = username.value.trim();
+
 
     if (firstNameValue === '') {
         setErrorFor(firstName, 'Firstname cannot be blank');
+
     } else {
         setSuccessFor(firstName);
-    }
-
-    if (emailValue === '') {
-        setErrorFor(email, 'Email cannot be blank');
-    } else if (!isEmail(emailValue)) {
-        setErrorFor(email, 'Not a valid email');
-    } else {
-        setSuccessFor(email);
     }
 
     if (passwordValue === '') {
@@ -44,11 +35,16 @@ function checkInputs() {
         setSuccessFor(lastName);
     }
 
-    if (position === '') {
+    if (positionValue === '') {
         setErrorFor(position, 'Position cannot be blank');
     } else {
         setSuccessFor(Position);
     }
+    if (usernameValue === '') {
+            setErrorFor(username, 'Username cannot be blank');
+        } else {
+            setSuccessFor(Username);
+        }
 }
 
 function setErrorFor(input, message) {

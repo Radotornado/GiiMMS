@@ -17,12 +17,13 @@
 
             <div class="data">
                 <form id="addEmployeeForm" class="addForm" method="POST"
-                      th:action="@{/addEmployee}">
+                      th:action="@{/addEmployee}" onsubmit="return validateForm()" >
                     <div class="formGroup">
                         <input name="username" type="text" class="formInput"
                                placeholder="Username"
                                autofocus="true" id="username"/>
                         <small>Error Message</small>
+
                     </div>
                     <div class="formGroup">
                         <input name="password" type="password" class="formInput"
@@ -44,7 +45,7 @@
                                placeholder="Position" id="position"/>
                         <small>Error Message</small>
                     </div>
-                    <button class="btn" style="border-bottom: #d2d2d2 1px solid"
+                    <button id="addEmployee" class="btn" style="border-bottom: #d2d2d2 1px solid"
                             onclick="document.forms['addEmployeeForm'].submit()">
                         Add new Employee
                     </button>
