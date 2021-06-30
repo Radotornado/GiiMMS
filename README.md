@@ -3,3 +3,4 @@
 Radoslav Mandev (`89265`), Matthias Galler (`82436`), Michael Baturin (`85201`)
 
 Mitarbeitermanagementsystem für Mitarbeiter und ihre Arbeitszeiten zu verwalten und einzusehen.
+
