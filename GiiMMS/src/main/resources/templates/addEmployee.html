@@ -17,7 +17,7 @@
 
             <div class="data">
                 <form id="addEmployeeForm" class="addForm" method="POST"
-                      th:action="@{/addEmployee}" onsubmit="return validateForm()" >
+                      th:action="@{/addEmployee}" onsubmit="return validateForm()">
                     <div class="formGroup">
                         <input name="username" type="text" class="formInput"
                                placeholder="Username"
@@ -45,8 +45,7 @@
                                placeholder="Position" id="position"/>
                         <small>Error Message</small>
                     </div>
-                    <button id="addEmployee" class="btn" style="border-bottom: #d2d2d2 1px solid"
-                            onclick="document.forms['addEmployeeForm'].submit()">
+                    <button id="addEmployee" class="btn" style="border-bottom: #d2d2d2 1px solid">
                         Add new Employee
                     </button>
                 </form>
