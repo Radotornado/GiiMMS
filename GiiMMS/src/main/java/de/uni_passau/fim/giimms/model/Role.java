@@ -11,11 +11,15 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.util.Set;
 
+/**
+ * A role is the level of access of a User.
+ */
 @Entity
 @Getter
 @Setter
 @Table(name = "role")
 public class Role {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

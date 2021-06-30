@@ -1,6 +1,5 @@
 package de.uni_passau.fim.giimms.model;
 
-import de.uni_passau.fim.giimms.util.Coordinates;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -17,6 +16,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import java.util.Set;
 
+/**
+ * An Employee is an Entity of an employee in a firm. They have a unique
+ * id and username, a password, coordinates, names, position, availability
+ * and status.
+ */
 @Getter
 @Setter
 @Builder
@@ -59,8 +63,14 @@ public class Employee {
     @ManyToMany
     private Set<Role> roles;
 
-    public Employee(String username, String password, Coordinates coordinates,
-                    String firstName, String lastName, String position) {
+    /**
+     * Constructor for creating an Employee with all non-mandatory fields and
+     * coordinates.
+     */
+    public Employee(final String username, final String password,
+                    final Coordinates coordinates,
+                    final String firstName, final String lastName,
+                    final String position) {
         this.username = username;
         this.password = password;
         this.coordinates = coordinates;
@@ -73,8 +83,12 @@ public class Employee {
         this.isAdmin = false;
     }
 
-    public Employee(String username, String password,
-                    String firstName, String lastName, String position) {
+    /**
+     * Constructor for creating an Employee with all non-mandatory fields.
+     */
+    public Employee(final String username, final String password,
+                    final String firstName, final String lastName,
+                    final String position) {
         this.username = username;
         this.password = password;
         this.coordinates = null;
@@ -87,16 +101,30 @@ public class Employee {
         this.isAdmin = false;
     }
 
+    /**
+     * Stops the timer when the user logs out.
+     */
     private void stopTimer() {
         if (!isAvailable) {
             availableTimeEnd = System.currentTimeMillis();
         }
     }
 
+    /**
+     * Returns the first and last name, separated by comma.
+     *
+     * @return The names.
+     */
     public String getNames() {
         return firstName + " " + lastName;
     }
 
+    /**
+     * Prepares the object for exporting to json (because the other fields
+     * are not meant to be exported with it).
+     *
+     * @return The Employee ready to be converted to JSON.
+     */
     public String toJson() {
         return "Employee{"
                 + "id: " + id

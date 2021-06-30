@@ -1,16 +1,13 @@
 package de.uni_passau.fim.giimms.controllers;
 
-import de.uni_passau.fim.giimms.model.Admin;
 import de.uni_passau.fim.giimms.model.Employee;
 import de.uni_passau.fim.giimms.services.EmployeeService;
 import de.uni_passau.fim.giimms.services.JsonExporterService;
-import de.uni_passau.fim.giimms.services.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,52 +20,31 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.Principal;
 
+/**
+ * Controls exporting and data addition of an Employee.
+ */
 @Controller
 public class EmployeeController {
+
     @Autowired
     private EmployeeService employeeService;
 
     @Autowired
-    private SecurityService securityService;
-
-    @Autowired
     private JsonExporterService jsonExporter;
 
-    @GetMapping("/terminal")
-    @PostMapping("/terminal")
-    public String terminal(Model model, String error, String logout) {
-
-        if (securityService.isAuthenticated()) {
-            return "redirect:/";
-        }
-
-        if (error != null)
-            model.addAttribute("error", "Username or password is invalid.");
-
-        if (logout != null)
-            model.addAttribute("message", "Logged out successfully.");
-
-        return "/terminal";
-    }
-
-    @GetMapping("/")
-    public String loggedIn(Model model, Principal principal) {
-        Employee employee = employeeService.findByUsername(principal.getName());
-        if (employee.isAdmin()) {
-            Admin admin = (Admin) employeeService.findByUsername(principal.getName());
-            model.addAttribute("admin", admin);
-            employeeService.update(admin);
-            return "adminPanel";
-        }
-        model.addAttribute("employee", employee);
-        return "employeePanel";
-    }
-
+    /**
+     * Returns a JSON file, containing all data for the current Employee.
+     */
     @GetMapping("/exportJSON/{id:[1-9]+[0-9]*}")
-    public ResponseEntity<byte[]> exportJSON(@PathVariable("id") Long id) {
+    public ResponseEntity<byte[]> exportJSON(
+            @PathVariable("id") final Long id) {
+        // get the Employee by the id
         Employee employee = employeeService.findById(id);
+        // export it as JSON
         String employeeJSON = jsonExporter.export(employee);
+        // convert it to a byte array
         byte[] employeeJSONBytes = employeeJSON.getBytes();
+        // return it as a response entity, naming the file with the username
         return ResponseEntity
                 .ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + employee.getUsername() + ".json")
@@ -77,25 +53,43 @@ public class EmployeeController {
                 .body(employeeJSONBytes);
     }
 
+    /**
+     * Returns a CSV file, containing all data for the current Employee.
+     */
     @GetMapping("/exportCSV/{id:[1-9]+[0-9]*}")
-    public void exportCSV(@PathVariable("id") Long id, HttpServletResponse response) throws IOException {
+    public void exportCSV(@PathVariable("id") final Long id,
+                          final HttpServletResponse response)
+            throws IOException {
+        // get the employee by the id
         Employee employee = employeeService.findById(id);
-        String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=" + employee.getUsername() + ".csv";
-        response.setHeader(headerKey, headerValue);
-        ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
-        String[] csvHeader = {"Username", "First Name", "Last Name", "Position", "Coordinates", "Status", "Data"};
-        String[] nameMapping = {"username", "firstName", "lastName", "position", "coordinates", "status", "data"};
+        // create the header value
+        String headerValue = "attachment; filename="
+                + employee.getUsername() + ".csv";
+        // set the header
+        response.setHeader("Content-Disposition", headerValue);
+        // write it as csv
+        ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(),
+                CsvPreference.STANDARD_PREFERENCE);
+        // map column names to fields
+        String[] csvHeader = {"Username", "First Name", "Last Name",
+                "Position", "Coordinates", "Status", "Data"};
+        String[] nameMapping = {"username", "firstName", "lastName",
+                "position", "coordinates", "status", "data"};
+        // write them and close the writer
         csvWriter.writeHeader(csvHeader);
         csvWriter.write(employee, nameMapping);
         csvWriter.close();
     }
 
+    /**
+     * Handles the Employee data (text about his work today).
+     */
     @PostMapping("/")
-    public String handleForm(@RequestParam("details") String input, Principal principal) {
+    public String handleForm(@RequestParam("details") final String input,
+                             final Principal principal) {
         Employee employee = employeeService.findByUsername(principal.getName());
         employee.setData(input);
-        // FIXME
+        // TODO:
         //employeeService.delete(employee.getUsername());
         //employeeService.save(employee);
         return "redirect:/";

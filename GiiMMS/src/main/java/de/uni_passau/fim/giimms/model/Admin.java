@@ -1,6 +1,5 @@
 package de.uni_passau.fim.giimms.model;
 
-import de.uni_passau.fim.giimms.util.Coordinates;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import java.util.List;
 
+/**
+ * An Admin is an Employee with additionally a list of all employees.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -20,9 +22,13 @@ public class Admin extends Employee {
     @ManyToMany
     private List<Employee> employees;
 
-    public Admin(String username, String password, Coordinates coordinates,
-                 String firstName, String lastName, String position,
-                 List<Employee> employees) {
+    /**
+     * Constructor for an Admin.
+     */
+    public Admin(final String username, final String password,
+                 final Coordinates coordinates, final String firstName,
+                 final String lastName, final String position,
+                 final List<Employee> employees) {
         this.username = username;
         this.password = password;
         this.coordinates = coordinates;
@@ -34,24 +40,5 @@ public class Admin extends Employee {
         this.availableTimeStart = System.currentTimeMillis();
         this.isAdmin = true;
         this.employees = employees;
-    }
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", email='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", coordinates=" + coordinates +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", position='" + position + '\'' +
-                ", availableTimeStart=" + availableTimeStart +
-                ", availableTimeEnd=" + availableTimeEnd +
-                ", status=" + status +
-                ", isAvailable=" + isAvailable +
-                ", isAdmin=" + isAdmin +
-                ", list=" + employees +
-                '}';
     }
 }

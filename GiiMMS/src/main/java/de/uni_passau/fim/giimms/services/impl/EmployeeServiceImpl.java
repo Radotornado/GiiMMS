@@ -1,6 +1,5 @@
 package de.uni_passau.fim.giimms.services.impl;
 
-import de.uni_passau.fim.giimms.model.Admin;
 import de.uni_passau.fim.giimms.model.Employee;
 import de.uni_passau.fim.giimms.repositories.EmployeeRepository;
 import de.uni_passau.fim.giimms.repositories.RoleRepository;
@@ -12,6 +11,11 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.List;
 
+/**
+ * Implementation of the EmployeeService. Saves and searches for the employees,
+ * saved in the database. Also handles updating the admin for the list
+ * of all employees.
+ */
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
@@ -22,42 +26,47 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private BCryptPasswordEncoder passEncoder;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void save(Employee employee) {
+    public void save(final Employee employee) {
         employee.setPassword(passEncoder.encode(employee.getPassword()));
         employee.setRoles(new HashSet<>(roleRepository.findAll()));
         employeeRepository.save(employee);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void saveAll(List<Employee> employees) {
+    public void saveAll(final List<Employee> employees) {
         for (Employee employee : employees) {
-            employeeRepository.save(employee);
+            save(employee);
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public Employee findByUsername(String username) {
+    public Employee findByUsername(final String username) {
         return employeeRepository.findByUsername(username);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public Employee findById(long id) {
+    public Employee findById(final long id) {
         return employeeRepository.getById(id);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void delete(String username) {
+    public void delete(final String username) {
         employeeRepository.delete(employeeRepository.findByUsername(username));
-    }
-
-    @Override
-    public void update(Admin admin) {
-        List<Employee> employees = employeeRepository.findAll();
-        employees.removeIf(Employee::isAdmin);
-        admin.setEmployees(employees);
-        admin.setPassword(passEncoder.encode(admin.getPassword()));
-        admin.setRoles(new HashSet<>(roleRepository.findAll()));
-        employeeRepository.save(admin);
     }
 }
