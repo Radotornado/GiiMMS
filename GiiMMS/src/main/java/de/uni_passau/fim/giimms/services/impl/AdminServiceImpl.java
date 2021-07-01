@@ -33,7 +33,7 @@ public class AdminServiceImpl implements AdminService {
     public void update(final Admin admin) {
         // get a list of all employees and remove all admins from it
         List<Employee> employees = employeeRepository.findAll();
-        employees.removeIf(Employee::isAdmin);
+        employees.removeIf(Employee::getAdmin);
         admin.setEmployees(employees);
         admin.setPassword(passEncoder.encode(admin.getPassword()));
         admin.setRoles(new HashSet<>(roleRepository.findAll()));

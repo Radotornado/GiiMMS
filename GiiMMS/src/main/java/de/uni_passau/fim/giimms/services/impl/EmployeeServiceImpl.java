@@ -1,9 +1,12 @@
 package de.uni_passau.fim.giimms.services.impl;
 
+import de.uni_passau.fim.giimms.GiiMmsApplication;
 import de.uni_passau.fim.giimms.model.Employee;
 import de.uni_passau.fim.giimms.repositories.EmployeeRepository;
 import de.uni_passau.fim.giimms.repositories.RoleRepository;
 import de.uni_passau.fim.giimms.services.EmployeeService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -72,7 +75,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void changePassword(Employee employee, boolean b, String password) {
-        employee.setFirstLogin(b ,password);
+        Logger logger = LoggerFactory.getLogger(GiiMmsApplication.class);
+        logger.info(employee.getPassword());
+        Employee emp =
+                employeeRepository.findByUsername(employee.getUsername());
+        emp.changePassword(b, passEncoder.encode(password));
+        employeeRepository.save(emp);
+        logger.info(employeeRepository.findByUsername(emp.getUsername()).getPassword());
     }
 
 }

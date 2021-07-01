@@ -110,9 +110,9 @@ public class Employee {
         return isAdmin;
     }
 
-    public void setFirstLogin(boolean loggedIn, String newPassword){
-        firstLogin = loggedIn;
-        password = newPassword;
+    public void changePassword(boolean loggedIn, String newPassword){
+        setFirstLogin(loggedIn);
+        setPassword(newPassword);
     }
 
     public boolean getFirstLogin(){

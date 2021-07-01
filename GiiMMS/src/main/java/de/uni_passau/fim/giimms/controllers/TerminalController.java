@@ -1,10 +1,13 @@
 package de.uni_passau.fim.giimms.controllers;
 
+import de.uni_passau.fim.giimms.GiiMmsApplication;
 import de.uni_passau.fim.giimms.model.Admin;
 import de.uni_passau.fim.giimms.model.Employee;
 import de.uni_passau.fim.giimms.services.AdminService;
 import de.uni_passau.fim.giimms.services.EmployeeService;
 import de.uni_passau.fim.giimms.services.SecurityService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -62,35 +65,29 @@ public class TerminalController {
             employeeService.findByUsername(principal.getName());
             model.addAttribute("admin", admin);
             adminService.update(admin);
-            if(employee.getFirstLogin()){
-                model.addAttribute("password", "");
-                model.addAttribute("repeatPassword", "");
-                return "changePassword";
-            }
             return "adminPanel";
         }
-        model.addAttribute("employee", employee);
         if(employee.getFirstLogin()){
+            model.addAttribute("username", employee.getUsername());
             model.addAttribute("password", "");
             model.addAttribute("repeatPassword", "");
             return "changePassword";
         }
+        model.addAttribute("employee",employee );
         return "employeePanel";
     }
 
-    @RequestMapping(value = "/terminal",
+    @RequestMapping(value = "/changePassword",
             method = {RequestMethod.POST})
-    public String changePassword(Model model, @ModelAttribute String password,
-                                 @ModelAttribute String repeatPassword,
-                                 Principal principal) {
-        Employee employee = employeeService.findByUsername(principal.getName());
-        if(password == repeatPassword){
-            employeeService.changePassword(employee, false, password);
-            if(employee.getAdmin()){
-                return "adminPanel";
-            }else{
-                return "employeePanel";
-            }
+    public String changePassword(Model model, @RequestParam String[] password,
+                                 @RequestParam String repeatPassword) {
+        Employee employee = employeeService.findByUsername(password[0]);
+        Logger log = LoggerFactory.getLogger(GiiMmsApplication.class);
+        log.info(password[0]);
+        if(password[1].equals(repeatPassword)){
+            employeeService.changePassword(employee, false, password[1]);
+            model.addAttribute("employee", employee);
+            return "employeePanel";
         }else{
             model.addAttribute("error", "Password doesn't equal repeated " +
                     "password. Pleas try again");
