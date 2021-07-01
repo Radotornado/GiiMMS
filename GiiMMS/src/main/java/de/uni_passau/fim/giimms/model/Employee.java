@@ -59,6 +59,9 @@ public class Employee {
     protected boolean isAdmin;
     @Column(name = "data")
     protected String data;
+    @Column(name = "firstTimePassword")
+    protected boolean firstLogin;
+
 
     @ManyToMany
     private Set<Role> roles;
@@ -81,6 +84,7 @@ public class Employee {
         this.isAvailable = false;
         this.availableTimeStart = System.currentTimeMillis();
         this.isAdmin = false;
+        this.firstLogin = true;
     }
 
     /**
@@ -99,6 +103,20 @@ public class Employee {
         this.isAvailable = false;
         this.availableTimeStart = System.currentTimeMillis();
         this.isAdmin = false;
+        this.firstLogin = true;
+    }
+
+    public boolean getAdmin() {
+        return isAdmin;
+    }
+
+    public void setFirstLogin(boolean loggedIn, String newPassword){
+        firstLogin = loggedIn;
+        password = newPassword;
+    }
+
+    public boolean getFirstLogin(){
+        return firstLogin;
     }
 
     /**

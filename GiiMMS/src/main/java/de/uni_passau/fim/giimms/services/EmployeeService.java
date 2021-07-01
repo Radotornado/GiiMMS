@@ -52,4 +52,6 @@ public interface EmployeeService {
      * @param username The username to search for.
      */
     void delete(String username);
+
+    void changePassword(Employee employeee,boolean b, String password);
 }

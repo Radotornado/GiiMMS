@@ -69,4 +69,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void delete(final String username) {
         employeeRepository.delete(employeeRepository.findByUsername(username));
     }
+
+    @Override
+    public void changePassword(Employee employee, boolean b, String password) {
+        employee.setFirstLogin(b ,password);
+    }
+
 }

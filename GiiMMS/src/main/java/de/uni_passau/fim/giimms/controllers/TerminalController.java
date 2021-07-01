@@ -8,9 +8,7 @@ import de.uni_passau.fim.giimms.services.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
@@ -59,14 +57,44 @@ public class TerminalController {
     public String loggedIn(Model model, Principal principal) {
         Employee employee = employeeService.findByUsername(principal.getName());
         // check if and Admin is trying to log in and redirect accordingly
-        if (employee.isAdmin()) {
+        if (employee.getAdmin()) {
             Admin admin = (Admin)
-                    employeeService.findByUsername(principal.getName());
+            employeeService.findByUsername(principal.getName());
             model.addAttribute("admin", admin);
             adminService.update(admin);
+            if(employee.getFirstLogin()){
+                model.addAttribute("password", "");
+                model.addAttribute("repeatPassword", "");
+                return "changePassword";
+            }
             return "adminPanel";
         }
         model.addAttribute("employee", employee);
+        if(employee.getFirstLogin()){
+            model.addAttribute("password", "");
+            model.addAttribute("repeatPassword", "");
+            return "changePassword";
+        }
         return "employeePanel";
+    }
+
+    @RequestMapping(value = "/terminal",
+            method = {RequestMethod.POST})
+    public String changePassword(Model model, @ModelAttribute String password,
+                                 @ModelAttribute String repeatPassword,
+                                 Principal principal) {
+        Employee employee = employeeService.findByUsername(principal.getName());
+        if(password == repeatPassword){
+            employeeService.changePassword(employee, false, password);
+            if(employee.getAdmin()){
+                return "adminPanel";
+            }else{
+                return "employeePanel";
+            }
+        }else{
+            model.addAttribute("error", "Password doesn't equal repeated " +
+                    "password. Pleas try again");
+            return "changePassword";
+        }
     }
 }
