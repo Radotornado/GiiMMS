@@ -1,63 +1,33 @@
-const form = document.getElementById('addEmployeeForm');
-const firstName = document.getElementById('firstName');
-const lastName = document.getElementById('lastName');
-const password = document.getElementById('password');
-const position = document.getElementById('position');
-const username = document.getElementById('username');
-
 function validateForm() {
+    // get value and trim the whitespaces
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const firstName = document.getElementById('firstName').value.trim();
+    const lastName = document.getElementById('lastName').value.trim();
+    const position = document.getElementById('position').value.trim();
+    const data = [username, password, firstName, lastName, position];
+    const specialChars = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 
-    // trim to remove the whitespaces
-    const firstNameValue = firstName.value.trim();
-    const lastNameValue = lastName.value.trim();
-    const passwordValue = password.value.trim();
-    const positionValue = position.value.trim();
-    const usernameValue = username.value.trim();
-
-    if (!firstNameValue) {
-        setErrorFor(firstName, 'Firstname cannot be blank');
+    // check if any field is empty
+    if (data.some(e => !e)) {
+        setError("All fields are required");
+        return false;
+    } else if (username.length > 21 || username.length < 3
+        || firstName.length > 21 || firstName.length < 3
+        || lastName.length > 21 || lastName.length < 3) {
+        setError("Username, given and family name must be between 3 and 20 chars.");
+        return false;
+    } else if (password.length > 21 || password.length < 6) {
+        setError("Password must be between 6 and 20 characters.");
+        return false;
+    } else if (!password.match(specialChars)) {
+        setError("Password must contain at least one special character.");
         return false;
     } else {
-        setSuccessFor(firstName);
+        document.forms['addEmployeeForm'].submit();
     }
-
-    if (!passwordValue) {
-        setErrorFor(password, 'Password cannot be blank');
-        return false;
-    } else {
-        setSuccessFor(password);
-    }
-
-    if (!lastNameValue) {
-        setErrorFor(lastName, 'Lastname cannot be blank');
-        return false;
-    } else {
-        setSuccessFor(lastName);
-    }
-
-    if (!positionValue) {
-        setErrorFor(position, 'Position cannot be blank');
-        return false;
-    } else {
-        setSuccessFor(position);
-    }
-    if (!usernameValue) {
-        setErrorFor(username, 'Username cannot be blank');
-        return false;
-    } else {
-        setSuccessFor(username);
-    }
-    document.forms['addEmployeeForm'].submit();
 }
 
-function setErrorFor(input, message) {
-    const formControl = input.parentElement;
-    const small = formControl.querySelector('small');
-    formControl.className = 'form-control error';
-    small.innerText = message;
-}
-
-function setSuccessFor(input) {
-    const formControl = input.parentElement;
-    formControl.className = 'form-control success';
+function setError(message) {
+    document.getElementById("error").textContent = message;
 }

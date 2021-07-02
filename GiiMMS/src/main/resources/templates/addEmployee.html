@@ -7,7 +7,7 @@
     <title>Create a new Employee</title>
 </head>
 <body onload="autoLogout();">
-<div class="form">
+<div class="form" style="margin-top: 5vh">
     <div sec:authorize="isAuthenticated()">
         <div class="container">
             <header class="formHeader">
@@ -18,6 +18,7 @@
             <div class="data">
                 <form id="addEmployeeForm" class="addForm" method="POST"
                       th:action="@{/addEmployee}" onsubmit="return validateForm()">
+                    <span class="error" id="error"></span>
                     <div class="formGroup">
                         <input name="username" type="text" class="formInput"
                                placeholder="Username"
