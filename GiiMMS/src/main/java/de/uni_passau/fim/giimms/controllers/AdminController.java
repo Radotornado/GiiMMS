@@ -1,9 +1,12 @@
 package de.uni_passau.fim.giimms.controllers;
 
+import de.uni_passau.fim.giimms.model.Coordinates;
 import de.uni_passau.fim.giimms.model.Employee;
 import de.uni_passau.fim.giimms.model.OTUPassword;
+import de.uni_passau.fim.giimms.model.OfficialTerminal;
 import de.uni_passau.fim.giimms.services.EmployeeService;
 import de.uni_passau.fim.giimms.services.OTUPasswordService;
+import de.uni_passau.fim.giimms.services.OfficialTerminalService;
 import de.uni_passau.fim.giimms.services.SecurityService;
 import de.uni_passau.fim.giimms.util.EmployeeValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.security.Principal;
+import java.util.List;
 
 
 /**
@@ -33,14 +39,16 @@ public class AdminController {
     @Autowired
     private OTUPasswordService otuPasswordService;
 
+    @Autowired
+    private OfficialTerminalService officialTerminalService;
+
     /**
      * Handles returning of the page for adding employees.
      */
     @GetMapping("/addEmployee")
-    public String registration(final Model model) {
-        // FIXME: a normal, logged in employee can access the addEmployee
-        // page (cannot add a new one, but still should be fixed)
-        if (securityService.isAuthenticated()) {
+    public String registration(final Model model, Principal principal) {
+        Employee employee = employeeService.findByUsername(principal.getName());
+        if (securityService.isAuthenticated() && employee.getAdmin()) {
             return "addEmployee";
         }
         model.addAttribute("employeeForm", new Employee());
@@ -62,8 +70,64 @@ public class AdminController {
         // TODO: implement bindingResult and validator
         // employeeValidator.validate(employee, bindingResult);
         employeeService.save(employee);
-        otuPasswordService.save(new OTUPassword(username));
         return "redirect:/";
+    }
+
+    /**
+     * Handles returning of the page for adding employees.
+     */
+    @GetMapping("/officialTerminals")
+    public String officialTerminal(final Model model, Principal principal) {
+        Employee employee = employeeService.findByUsername(principal.getName());
+        if (securityService.isAuthenticated() && employee.getAdmin()) {
+            Object[] officialTerminalList =
+                    officialTerminalService.getAll().toArray();
+            model.addAttribute("officialTerminals", officialTerminalList);
+            return "officialTerminals";
+        }
+        return "error";
+    }
+
+    /**
+     * Handles returning of the page for adding employees.
+     */
+    @GetMapping("/addTerminal")
+    public String addTerminals(final Model model, Principal principal) {
+        Employee employee = employeeService.findByUsername(principal.getName());
+        if (securityService.isAuthenticated() && employee.getAdmin()) {
+            return "/addTerminal";
+        }
+        return "error";
+    }
+
+    /**
+     * Handles returning of the page for adding employees.
+     */
+    @PostMapping("/addTerminal")
+    public String offTerminalPost(final Model model, Principal principal,
+                                  @RequestParam String branchName,
+                                  @RequestParam String latitude,
+                                  @RequestParam String longitude) {
+        Employee employee = employeeService.findByUsername(principal.getName());
+        try {
+            if (securityService.isAuthenticated() && employee.getAdmin()) {
+
+                Coordinates coordinates =
+                        new Coordinates(Double.parseDouble(latitude),
+                                Double.parseDouble(longitude));
+                officialTerminalService.save(new OfficialTerminal(coordinates
+                        , branchName));
+                Object[] officialTerminalList =
+                        officialTerminalService.getAll().toArray();
+                model.addAttribute("officialTerminals", officialTerminalList);
+                return "officialTerminals";
+            }
+
+        }catch(NumberFormatException exception){
+            model.addAttribute("error", "The Longitude or Latitude was not proper." +
+                    " Please try again." + exception.getLocalizedMessage());
+        }
+        return "/addTerminal";
     }
 
     /**

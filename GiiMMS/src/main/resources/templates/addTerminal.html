@@ -1,0 +1,71 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/terminalStyle.css}">
+    <link rel="shortcut icon" type="image/png" th:href="@{/img/favicon.ico}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Create a Official Terminal</title>
+</head>
+<body>
+<div class="form">
+    <div sec:authorize="isAuthenticated()">
+        <div class="container">
+            <header class="formHeader">
+                <img th:src="@{/img/logo.png}" alt="logo" class="logo">
+                <h1>Add a new OfficialTerminal</h1>
+            </header>
+
+            <div class="data">
+                <form id="addTerminalForm" class="addForm" method="POST"
+                      th:action="@{/addTerminal}"
+                      onsubmit="return validateTerminalForm()">
+                    <div class="formGroup">
+                        <input name="branchName" type="text" class="formInput"
+                               placeholder="Branch Name"
+                               autofocus="true" id="branchName"/>
+                        <small>Error Message</small>
+
+                    </div>
+                    <div class="formGroup">
+                        <input name="latitude" type="text" class="formInput"
+                               placeholder="Latitude"
+                               autofocus="true" id="latitude"/>
+                        <small>Error Message</small>
+                    </div>
+                    <div class="formGroup">
+                        <input name="longitude" type="text" class="formInput"
+                               placeholder="Longitude"
+                               autofocus="true" id="longitude"/>
+                        <small>Error Message</small>
+                    </div>
+                    <button id="addTerminal" class="btn"
+                            style="border-bottom: #d2d2d2 1px solid">
+                        Add Terminal
+                    </button>
+                </form>
+                <div class="buttons">
+                    <form id="clearForm" method="GET"
+                          th:action="@{/addEmployee}">
+                        <button class="btn"
+                                style="border-bottom: #d2d2d2 1px solid"
+                                onclick="document.forms['clearForm'].submit()">
+                            Clear fields
+                        </button>
+                    </form>
+                    <form id="backForm" method="GET" th:action="@{/terminal}">
+                        <button class="btn"
+                                onclick="document.forms['backForm'].submit()">
+                            Back to Admin Panel
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div th:include="fragments/copyright"></div>
+    </footer>
+</body>
+<script th:src="@{/js/inputvalidation.js}"></script>
+<script th:src="@{/js/terminal.js}"></script>
+</html>

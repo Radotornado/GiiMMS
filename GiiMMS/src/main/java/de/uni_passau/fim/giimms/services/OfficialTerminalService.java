@@ -3,6 +3,8 @@ package de.uni_passau.fim.giimms.services;
 import de.uni_passau.fim.giimms.model.Coordinates;
 import de.uni_passau.fim.giimms.model.OfficialTerminal;
 
+import java.util.List;
+
 public interface OfficialTerminalService {
 
     /**
@@ -23,4 +25,6 @@ public interface OfficialTerminalService {
      * @return true if coordinates match a official Terminal, false if not
      */
     boolean isOfficialTerminal(Coordinates coordinates);
+
+    List<OfficialTerminal> getAll();
 }

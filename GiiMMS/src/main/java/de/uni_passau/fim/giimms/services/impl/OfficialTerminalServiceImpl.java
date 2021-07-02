@@ -44,4 +44,9 @@ public class OfficialTerminalServiceImpl implements OfficialTerminalService {
         }
         return false;
     }
+
+    @Override
+    public List<OfficialTerminal> getAll() {
+        return officialTerminalRepository.findAll();
+    }
 }

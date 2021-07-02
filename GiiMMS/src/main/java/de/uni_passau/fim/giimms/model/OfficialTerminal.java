@@ -20,8 +20,11 @@ public class OfficialTerminal {
     @Embedded
     @Column(name = "coordinates")
     protected Coordinates coordinates;
+    @Column(name = "branchName")
+    protected String branchName;
 
-    public OfficialTerminal(Coordinates coordinates){
+    public OfficialTerminal(Coordinates coordinates, String branchName){
         this.coordinates = coordinates;
+        this.branchName = branchName;
     }
 }

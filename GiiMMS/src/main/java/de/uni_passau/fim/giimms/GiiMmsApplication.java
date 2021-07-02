@@ -60,7 +60,8 @@ public class GiiMmsApplication {
                 new Coordinates(48.566499, 13.4518444),
                 "Nicola", "Berninger", "CEO", employees);
         OfficialTerminal officialTerminal =
-                new OfficialTerminal(new Coordinates(48.566499, 13.4518444));
+                new OfficialTerminal(new Coordinates(48.566499, 13.4518444),
+                        "Passau GiiMMS");
         return (args) -> {
             employeeService.saveAll(employees);
             adminService.update(giimms);

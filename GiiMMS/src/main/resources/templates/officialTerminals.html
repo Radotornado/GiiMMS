@@ -1,0 +1,66 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/adminStyle.css}">
+    <link rel="shortcut icon" type="image/png" th:href="@{/img/favicon.ico}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <title>Admin panel</title>
+</head>
+<body>
+<div sec:authorize="isAuthenticated()">
+    <div class="container">
+        <header class="header">
+            <img th:src="@{/img/logo.png}" alt="logo" class="logo">
+            <h1>Official Terminals </h1>
+        </header>
+
+        <div class="data">
+            <div class="left">
+                <form id="backForm" method="GET" th:action="@{/terminal}">
+                    <button class="btn"
+                            onclick="document.forms['backForm'].submit()">
+                        Back to Admin Panel
+                    </button>
+                </form>
+                <form id="addTerminal" method="GET" th:action="@{/addTerminal}">
+                    <button class="btn"
+                            onclick="document.forms['addTerminal'].submit()">
+                        Add official Terminal
+                    </button>
+                </form>
+            </div>
+
+            <div class="right">
+                <div class="tableHeader">
+                    <table cellpadding="0" cellspacing="0" border="0">
+                        <tr>
+                            <th>ID</th>
+                            <th>Branch Name</th>
+                            <th>Location</th>
+                        </tr>
+                    </table>
+                </div>
+                <div class="tableContent">
+                    <table cellpadding="0" cellspacing="0" border="0">
+                        <tr th:each="officialTerminal : ${officialTerminals}">
+                            <td th:text="${officialTerminal.id}"></td>
+                            <td th:text="${officialTerminal.branchName}"></td>
+                            <td th:text="${officialTerminal.coordinates}"></td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+</form>
+<footer>
+    <div th:include="fragments/copyright"></div>
+</footer>
+</body>
+</html>
+

@@ -37,6 +37,13 @@
                             Add a new Employee
                         </button>
                     </form>
+                    <form id="officialTerminals" method="GET"
+                          th:action="@{/officialTerminals}">
+                        <button class="btn"
+                                onclick="document.forms['officialTerminals'].submit()">
+                            Official Terminals
+                        </button>
+                    </form>
                     <form id="logoutForm" method="POST" th:action="@{/logout}">
                         <button class="btn"
                                 onclick="document.forms['logoutForm'].submit()">
