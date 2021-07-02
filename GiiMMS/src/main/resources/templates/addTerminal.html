@@ -19,24 +19,19 @@
                 <form id="addTerminalForm" class="addForm" method="POST"
                       th:action="@{/addTerminal}"
                       onsubmit="return validateTerminalForm()">
+                    <span class="error" id="error"></span>
                     <div class="formGroup">
                         <input name="branchName" type="text" class="formInput"
                                placeholder="Branch Name"
                                autofocus="true" id="branchName"/>
-                        <small>Error Message</small>
-
                     </div>
                     <div class="formGroup">
                         <input name="latitude" type="text" class="formInput"
-                               placeholder="Latitude"
-                               autofocus="true" id="latitude"/>
-                        <small>Error Message</small>
+                               placeholder="Latitude" id="latitude"/>
                     </div>
                     <div class="formGroup">
                         <input name="longitude" type="text" class="formInput"
-                               placeholder="Longitude"
-                               autofocus="true" id="longitude"/>
-                        <small>Error Message</small>
+                               placeholder="Longitude" id="longitude"/>
                     </div>
                     <button id="addTerminal" class="btn"
                             style="border-bottom: #d2d2d2 1px solid">
@@ -45,7 +40,7 @@
                 </form>
                 <div class="buttons">
                     <form id="clearForm" method="GET"
-                          th:action="@{/addEmployee}">
+                          th:action="@{/addTerminal}">
                         <button class="btn"
                                 style="border-bottom: #d2d2d2 1px solid"
                                 onclick="document.forms['clearForm'].submit()">
@@ -66,7 +61,7 @@
         <div th:include="fragments/copyright"></div>
     </footer>
 </body>
-<script th:src="@{/js/addEmployeeValidation.js}"></script>
+<script th:src="@{/js/addTerminalValidation.js}"></script>
 <script th:src="@{/js/terminal.js}"></script>
 <script th:src="@{/js/autoLogout.js}"></script>
 </html>

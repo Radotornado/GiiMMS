@@ -11,7 +11,7 @@
         <h1>Change Username</h1>
     </header>
 
-    <form class="loginForm" id="loginForm" method="POST"
+    <form class="loginForm" id="changeUsernameForm" method="POST"
           th:action="@{/changeUsername}"
           onsubmit="return validateForm()">
         <span class="error" id="error"></span>
@@ -20,7 +20,7 @@
                    class="formInput"
                    placeholder="New Username"/>
         </div>
-        <button class="btn" type="submit" name="loginbtn">Save</button>
+        <button class="btn" type="submit" name="changeUsernameBtn">Save</button>
     </form>
 </div>
 <footer>

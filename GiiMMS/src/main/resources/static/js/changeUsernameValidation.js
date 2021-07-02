@@ -6,6 +6,8 @@ function validateForm() {
     if (username.length < 3 || username.length > 20) {
         setError("Username must be between 3 and 20 characters.")
         return false;
+    } else {
+        document.forms['changeUsernameForm'].submit();
     }
 }
 
