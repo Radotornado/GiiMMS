@@ -54,4 +54,6 @@ public interface EmployeeService {
     void delete(String username);
 
     void changePassword(Employee employeee,boolean b, String password);
+
+    void userExpired(String username);
 }

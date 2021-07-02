@@ -1,7 +1,9 @@
 package de.uni_passau.fim.giimms.controllers;
 
 import de.uni_passau.fim.giimms.model.Employee;
+import de.uni_passau.fim.giimms.model.OTUPassword;
 import de.uni_passau.fim.giimms.services.EmployeeService;
+import de.uni_passau.fim.giimms.services.OTUPasswordService;
 import de.uni_passau.fim.giimms.services.SecurityService;
 import de.uni_passau.fim.giimms.util.EmployeeValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,9 @@ public class AdminController {
 
     @Autowired
     private SecurityService securityService;
+
+    @Autowired
+    private OTUPasswordService otuPasswordService;
 
     /**
      * Handles returning of the page for adding employees.
@@ -57,6 +62,7 @@ public class AdminController {
         // TODO: implement bindingResult and validator
         // employeeValidator.validate(employee, bindingResult);
         employeeService.save(employee);
+        otuPasswordService.save(new OTUPassword(username));
         return "redirect:/";
     }
 

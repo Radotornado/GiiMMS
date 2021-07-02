@@ -61,6 +61,8 @@ public class Employee {
     protected String data;
     @Column(name = "firstTimePassword")
     protected boolean firstLogin;
+    @Column(name = "isExpired")
+    protected boolean isExpired;
 
 
     @ManyToMany
@@ -85,6 +87,7 @@ public class Employee {
         this.availableTimeStart = System.currentTimeMillis();
         this.isAdmin = false;
         this.firstLogin = true;
+        this.isExpired = false;
     }
 
     /**
@@ -104,6 +107,7 @@ public class Employee {
         this.availableTimeStart = System.currentTimeMillis();
         this.isAdmin = false;
         this.firstLogin = true;
+        this.isExpired = false;
     }
 
     public boolean getAdmin() {
@@ -126,6 +130,14 @@ public class Employee {
         if (!isAvailable) {
             availableTimeEnd = System.currentTimeMillis();
         }
+    }
+
+    public boolean getIsExpired(){
+        return this.isExpired;
+    }
+
+    public void setIsExpired(boolean expired){
+        this.isExpired = expired;
     }
 
     /**

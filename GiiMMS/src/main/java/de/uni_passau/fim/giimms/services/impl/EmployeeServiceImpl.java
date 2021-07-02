@@ -2,9 +2,11 @@ package de.uni_passau.fim.giimms.services.impl;
 
 import de.uni_passau.fim.giimms.GiiMmsApplication;
 import de.uni_passau.fim.giimms.model.Employee;
+import de.uni_passau.fim.giimms.model.OTUPassword;
 import de.uni_passau.fim.giimms.repositories.EmployeeRepository;
 import de.uni_passau.fim.giimms.repositories.RoleRepository;
 import de.uni_passau.fim.giimms.services.EmployeeService;
+import de.uni_passau.fim.giimms.services.OTUPasswordService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     private RoleRepository roleRepository;
     @Autowired
     private BCryptPasswordEncoder passEncoder;
+    @Autowired
+    private OTUPasswordService otuPasswordService;
 
     /**
      * {@inheritDoc}
@@ -37,6 +41,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setPassword(passEncoder.encode(employee.getPassword()));
         employee.setRoles(new HashSet<>(roleRepository.findAll()));
         employeeRepository.save(employee);
+        otuPasswordService.save(new OTUPassword(employee.getUsername()));
     }
 
     /**
@@ -82,6 +87,16 @@ public class EmployeeServiceImpl implements EmployeeService {
         emp.changePassword(b, passEncoder.encode(password));
         employeeRepository.save(emp);
         logger.info(employeeRepository.findByUsername(emp.getUsername()).getPassword());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void userExpired(String username) {
+        Employee expiredEmployee = employeeRepository.findByUsername(username);
+        expiredEmployee.setIsExpired(true);
+        employeeRepository.save(expiredEmployee);
     }
 
 }
