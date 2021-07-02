@@ -5,6 +5,7 @@ import de.uni_passau.fim.giimms.model.Admin;
 import de.uni_passau.fim.giimms.model.Employee;
 import de.uni_passau.fim.giimms.services.AdminService;
 import de.uni_passau.fim.giimms.services.EmployeeService;
+import de.uni_passau.fim.giimms.services.OTUPasswordService;
 import de.uni_passau.fim.giimms.services.SecurityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,9 @@ public class TerminalController {
 
     @Autowired
     private EmployeeService employeeService;
+
+    @Autowired
+    private OTUPasswordService otuPasswordService;
 
     @Autowired
     private AdminService adminService;
@@ -59,10 +63,15 @@ public class TerminalController {
     @GetMapping("/")
     public String loggedIn(Model model, Principal principal) {
         Employee employee = employeeService.findByUsername(principal.getName());
+        if(employee.getIsExpired()){
+            model.addAttribute("error", "One time use password expired. " +
+                    "Contact an Administrator for more Information.");
+            return "/terminal";
+        }
         // check if and Admin is trying to log in and redirect accordingly
         if (employee.getAdmin()) {
             Admin admin = (Admin)
-            employeeService.findByUsername(principal.getName());
+                    employeeService.findByUsername(principal.getName());
             model.addAttribute("admin", admin);
             adminService.update(admin);
             return "adminPanel";
@@ -77,20 +86,31 @@ public class TerminalController {
         return "employeePanel";
     }
 
+    /**
+     * Handles the change in password and deletes the One Time Usage Password.
+     * @param model
+     * @param password
+     * @param repeatPassword
+     * @return
+     */
     @RequestMapping(value = "/changePassword",
             method = {RequestMethod.POST})
     public String changePassword(Model model, @RequestParam String[] password,
                                  @RequestParam String repeatPassword) {
         Employee employee = employeeService.findByUsername(password[0]);
-        Logger log = LoggerFactory.getLogger(GiiMmsApplication.class);
-        log.info(password[0]);
         if(password[1].equals(repeatPassword)){
+            otuPasswordService.useOTUPassword(password[0]);
+            if(employee.getIsExpired()){
+                model.addAttribute("error", "One time use password expired. " +
+                        "Contact an Administrator for more Information.");
+                return "/terminal";
+            }
             employeeService.changePassword(employee, false, password[1]);
             model.addAttribute("employee", employee);
             return "employeePanel";
         }else{
             model.addAttribute("error", "Password doesn't equal repeated " +
-                    "password. Pleas try again");
+                    "password. Please try again");
             return "changePassword";
         }
     }

@@ -25,7 +25,7 @@ public class OTUPasswordServiceImpl implements OTUPasswordService {
     @Override
     public boolean useOTUPassword(String username) {
         OTUPassword otuPassword = otuPasswordRepositories.findByUsername(username);
-        if(new Date().compareTo(otuPassword.getExpires()) > 0){
+        if(new Date().compareTo(otuPassword.getExpires()) < 0){
             otuPasswordRepositories.delete(otuPassword);
             return true;
         }
