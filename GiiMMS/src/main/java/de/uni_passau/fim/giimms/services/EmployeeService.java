@@ -53,7 +53,12 @@ public interface EmployeeService {
      */
     void delete(String username);
 
-    void changePassword(Employee employeee,boolean b, String password);
+    void changePassword(Employee employee, boolean b, String password);
 
     void userExpired(String username);
+
+    /**
+     * Changes the username of an Employee.
+     */
+    void changeUsername(Employee employee, String newUsername);
 }

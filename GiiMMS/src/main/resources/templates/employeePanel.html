@@ -28,12 +28,13 @@
                     <text class="prefix">Position:</text>
                     <span th:text="${employee.position}"></span>
                 </span><br/>
+                <!--
                 <span class="entry">
                     <text class="prefix">Time since login:</text>
-                    <!-- fixme: dummy data -->
+                    fixme: dummy data
                     <div id="timeElapsed"
                          th:text="${employee.availableTimeStart}"></div>
-                </span>
+                </span>-->
                 <span class="entry">
                     <text class="prefix">Availability:</text>
                         <input type="checkbox" checked>
@@ -53,8 +54,12 @@
                             Submit
                         </button>
                     </form>
-                    <form id="editDataForm" method="GET"  th:action="@{/changeUsername}">
-                        <button class="btn" name="edit" onclick="document.forms['editDataForm'].submit()">change Username</button>
+                    <form id="changeUsernameForm" method="GET"
+                          th:action="@{/changeUsername}">
+                        <button class="btn" name="edit"
+                                onclick="document.forms['changeUsernameForm'].submit()">
+                            Change Username
+                        </button>
                     </form>
                     <div class="exportLeft">
                         <form id="exportJSONForm" method="GET"
@@ -89,11 +94,11 @@
                 <div id="map">
                     <span th:text="${employee.coordinates}"></span>
                 </div>
-                    <script
-                            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAr08bWCmHTZIi1j6pWWYLA3hso28Bn2YU&callback=initMap&libraries=&v=weekly"
-                            async
-                    >
-                    </script>
+                <script
+                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAr08bWCmHTZIi1j6pWWYLA3hso28Bn2YU&callback=initMap&libraries=&v=weekly"
+                        async
+                >
+                </script>
             </div>
         </div>
     </div>

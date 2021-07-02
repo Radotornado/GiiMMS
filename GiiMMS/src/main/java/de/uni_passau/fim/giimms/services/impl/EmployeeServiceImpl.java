@@ -99,4 +99,14 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeRepository.save(expiredEmployee);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void changeUsername(Employee initialEmp, String newUsername) {
+        Employee employee =
+                employeeRepository.findByUsername(initialEmp.getUsername());
+        employee.setUsername(newUsername);
+        employeeRepository.save(employee);
+    }
 }

@@ -12,14 +12,13 @@
     </header>
 
     <form class="loginForm" id="loginForm" method="POST"
-          th:action="@{/changePassword}">
-        <span class="error" th:text="${error}"></span>
-        <span class="message" th:text="${message}"></span>
+          th:action="@{/changeUsername}"
+          onsubmit="return validateForm()">
+        <span class="error" id="error"></span>
         <div class="formGroup">
-            <input id="newUsername" name="newUsername" type="text"
+            <input id="username" name="newUsername" type="text"
                    class="formInput"
-                   placeholder="New Username" th:value="${username}"/>
-
+                   placeholder="New Username"/>
         </div>
         <button class="btn" type="submit" name="loginbtn">Save</button>
     </form>
@@ -27,5 +26,6 @@
 <footer>
     <div th:include="fragments/copyright"></div>
 </footer>
+<script th:src="@{/js/changeUsernameValidation.js}"></script>
 </body>
 </html>

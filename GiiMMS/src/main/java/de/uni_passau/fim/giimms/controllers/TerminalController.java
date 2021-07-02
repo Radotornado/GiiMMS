@@ -1,14 +1,11 @@
 package de.uni_passau.fim.giimms.controllers;
 
-import de.uni_passau.fim.giimms.GiiMmsApplication;
 import de.uni_passau.fim.giimms.model.Admin;
 import de.uni_passau.fim.giimms.model.Employee;
 import de.uni_passau.fim.giimms.services.AdminService;
 import de.uni_passau.fim.giimms.services.EmployeeService;
 import de.uni_passau.fim.giimms.services.OTUPasswordService;
 import de.uni_passau.fim.giimms.services.SecurityService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -63,7 +60,7 @@ public class TerminalController {
     @GetMapping("/")
     public String loggedIn(Model model, Principal principal) {
         Employee employee = employeeService.findByUsername(principal.getName());
-        if(employee.getIsExpired()){
+        if (employee.getIsExpired()) {
             model.addAttribute("error", "One time use password expired. " +
                     "Contact an Administrator for more Information.");
             return "/terminal";
@@ -76,18 +73,19 @@ public class TerminalController {
             adminService.update(admin);
             return "adminPanel";
         }
-        if(employee.getFirstLogin()){
+        if (employee.getFirstLogin()) {
             model.addAttribute("username", employee.getUsername());
             model.addAttribute("password", "");
             model.addAttribute("repeatPassword", "");
             return "changePassword";
         }
-        model.addAttribute("employee",employee );
+        model.addAttribute("employee", employee);
         return "employeePanel";
     }
 
     /**
      * Handles the change in password and deletes the One Time Usage Password.
+     *
      * @param model
      * @param password
      * @param repeatPassword
@@ -98,9 +96,9 @@ public class TerminalController {
     public String changePassword(Model model, @RequestParam String[] password,
                                  @RequestParam String repeatPassword) {
         Employee employee = employeeService.findByUsername(password[0]);
-        if(password[1].equals(repeatPassword)){
+        if (password[1].equals(repeatPassword)) {
             otuPasswordService.useOTUPassword(password[0]);
-            if(employee.getIsExpired()){
+            if (employee.getIsExpired()) {
                 model.addAttribute("error", "One time use password expired. " +
                         "Contact an Administrator for more Information.");
                 return "/terminal";
@@ -108,7 +106,7 @@ public class TerminalController {
             employeeService.changePassword(employee, false, password[1]);
             model.addAttribute("employee", employee);
             return "employeePanel";
-        }else{
+        } else {
             model.addAttribute("error", "Password doesn't equal repeated " +
                     "password. Please try again");
             return "changePassword";

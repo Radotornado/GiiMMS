@@ -17,7 +17,8 @@
 
             <div class="data">
                 <form id="addEmployeeForm" class="addForm" method="POST"
-                      th:action="@{/addEmployee}" onsubmit="return validateForm()">
+                      th:action="@{/addEmployee}"
+                      onsubmit="return validateForm()">
                     <span class="error" id="error"></span>
                     <div class="formGroup">
                         <input name="username" type="text" class="formInput"
@@ -46,7 +47,8 @@
                                placeholder="Position" id="position"/>
                         <small>Error Message</small>
                     </div>
-                    <button id="addEmployee" class="btn" style="border-bottom: #d2d2d2 1px solid">
+                    <button id="addEmployee" class="btn"
+                            style="border-bottom: #d2d2d2 1px solid">
                         Add new Employee
                     </button>
                 </form>
@@ -69,10 +71,11 @@
             </div>
         </div>
     </div>
-    <footer>
-        <div th:include="fragments/copyright"></div>
-    </footer>
+</div>
+<footer>
+    <div th:include="fragments/copyright"></div>
+</footer>
 </body>
-<script th:src="@{/js/inputvalidation.js}"></script>
+<script th:src="@{/js/addEmployeeValidation.js}"></script>
 <script th:src="@{/js/autoLogout.js}"></script>
 </html>

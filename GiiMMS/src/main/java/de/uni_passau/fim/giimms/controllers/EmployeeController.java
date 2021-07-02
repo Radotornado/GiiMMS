@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -94,9 +95,26 @@ public class EmployeeController {
         //employeeService.save(employee);
         return "redirect:/";
     }
+
+    /**
+     * Handles redirect to changeUsername panel.
+     */
     @GetMapping("/changeUsername")
     public String getChangeEmployee() {
         return "changeUsername";
+    }
+
+    /**
+     * Handles changing the username.
+     */
+    @PostMapping("/changeUsername")
+    public String changeEmployeeUsername(
+            @RequestParam("newUsername") final String newUsername,
+            final Principal principal) {
+        Employee employee = employeeService.findByUsername(principal.getName());
+        employeeService.changeUsername(employee, newUsername);
+        SecurityContextHolder.getContext().setAuthentication(null);
+        return "/terminal";
     }
 }
 
