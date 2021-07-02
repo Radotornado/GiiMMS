@@ -11,6 +11,7 @@ import java.util.Date;
 
 @Service
 public class OTUPasswordServiceImpl implements OTUPasswordService {
+
     @Autowired
     OTUPasswordRepositories otuPasswordRepositories;
 
@@ -18,14 +19,15 @@ public class OTUPasswordServiceImpl implements OTUPasswordService {
     EmployeeService employeeService;
 
     /**
-     * Uses the OTUPassword and will delete it
+     * Uses the OTUPassword and will delete it.
+     *
      * @param username the username to search for
-     * @return wether or not the User is expired
+     * @return whether or not the User is expired
      */
     @Override
     public boolean useOTUPassword(String username) {
         OTUPassword otuPassword = otuPasswordRepositories.findByUsername(username);
-        if(new Date().compareTo(otuPassword.getExpires()) < 0){
+        if (new Date().compareTo(otuPassword.getExpires()) < 0) {
             otuPasswordRepositories.delete(otuPassword);
             return true;
         }
@@ -34,7 +36,8 @@ public class OTUPasswordServiceImpl implements OTUPasswordService {
     }
 
     /**
-     * saves an instance of an otuPassword to the repository
+     * Saves an instance of an otuPassword to the repository.
+     *
      * @param otuPassword: given otuPassword to save
      */
     @Override

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public interface OTUPasswordService {
 
     /**
-     * Deletes an entity of OTUPassword on Login
+     * Deletes an entity of OTUPassword on Login.
      */
     boolean useOTUPassword(String username);
 

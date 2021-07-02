@@ -7,7 +7,7 @@
 
     <title>Admin panel</title>
 </head>
-<body>
+<body onload="autoLogout();">
 <div sec:authorize="isAuthenticated()">
     <div class="container">
         <header class="header">
@@ -89,5 +89,6 @@
 <footer>
     <div th:include="fragments/copyright"></div>
 </footer>
+<script th:src="@{/js/autoLogout.js}"></script>
 </body>
 </html>

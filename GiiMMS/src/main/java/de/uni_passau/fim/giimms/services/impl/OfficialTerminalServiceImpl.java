@@ -37,7 +37,8 @@ public class OfficialTerminalServiceImpl implements OfficialTerminalService {
         List<OfficialTerminal> terminalList =
                 officialTerminalRepository.findAll();
         for(int i=0; i < terminalList.size(); i++){
-            if(terminalList.get(i).getCoordinates().toString() == coordinates.toString()){
+            if(terminalList.get(i).getCoordinates().toString()
+                    .equals(coordinates.toString())){
                 isOfficial = true;
                 break;
             }

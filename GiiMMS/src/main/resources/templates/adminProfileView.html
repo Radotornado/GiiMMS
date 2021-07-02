@@ -5,7 +5,7 @@
     <link type="text/css" rel="stylesheet" th:href="@{/css/employeeStyle.css}">
     <title>Employee panel</title>
 </head>
-<body>
+<body onload="autoLogout();">
 
 <div sec:authorize="isAuthenticated()">
     <div class="container">
@@ -70,5 +70,6 @@
 
 <script th:src="@{/js/map.js}"></script>
 <script th:src="@{/js/time.js}"></script>
+<script th:src="@{/js/autoLogout.js}"></script>
 </body>
 </html>

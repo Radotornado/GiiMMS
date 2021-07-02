@@ -6,7 +6,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Create a new Employee</title>
 </head>
-<body>
+<body onload="autoLogout();">
 <div class="form">
     <div sec:authorize="isAuthenticated()">
         <div class="container">
@@ -73,4 +73,5 @@
     </footer>
 </body>
 <script th:src="@{/js/inputvalidation.js}"></script>
+<script th:src="@{/js/autoLogout.js}"></script>
 </html>
