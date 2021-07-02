@@ -53,7 +53,9 @@
                             Submit
                         </button>
                     </form>
-
+                    <form id="editDataForm" method="GET"  th:action="@{/changeUsername}">
+                        <button class="btn" name="edit" onclick="document.forms['editDataForm'].submit()">change Username</button>
+                    </form>
                     <div class="exportLeft">
                         <form id="exportJSONForm" method="GET"
                               th:action="@{/exportJSON/{id}(id=${employee.id})}">

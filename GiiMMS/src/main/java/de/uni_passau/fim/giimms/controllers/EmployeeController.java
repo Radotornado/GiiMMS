@@ -94,5 +94,9 @@ public class EmployeeController {
         //employeeService.save(employee);
         return "redirect:/";
     }
+    @GetMapping("/changeUsername")
+    public String getChangeEmployee() {
+        return "changeUsername";
+    }
 }
 
