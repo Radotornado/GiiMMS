@@ -2,9 +2,11 @@ package de.uni_passau.fim.giimms;
 
 import de.uni_passau.fim.giimms.model.Admin;
 import de.uni_passau.fim.giimms.model.Employee;
+import de.uni_passau.fim.giimms.model.OfficialTerminal;
 import de.uni_passau.fim.giimms.services.AdminService;
 import de.uni_passau.fim.giimms.services.EmployeeService;
 import de.uni_passau.fim.giimms.model.Coordinates;
+import de.uni_passau.fim.giimms.services.OfficialTerminalService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -41,7 +43,8 @@ public class GiiMmsApplication {
      */
     @Bean
     public CommandLineRunner demo(final EmployeeService employeeService,
-                                  final AdminService adminService) {
+                                  final AdminService adminService,
+                                  final OfficialTerminalService officialTerminalService) {
         Employee hans = new Employee("hans", "123456",
                 new Coordinates(48.566499, 13.4518444),
                 "Hans", "Schiller", "Sysadmin");
@@ -56,9 +59,12 @@ public class GiiMmsApplication {
         Admin giimms = new Admin("giimms", "giimms",
                 new Coordinates(48.566499, 13.4518444),
                 "Nicola", "Berninger", "CEO", employees);
+        OfficialTerminal officialTerminal =
+                new OfficialTerminal(new Coordinates(48.566499, 13.4518444));
         return (args) -> {
             employeeService.saveAll(employees);
             adminService.update(giimms);
+            officialTerminalService.save(officialTerminal);
         };
     }
 }
