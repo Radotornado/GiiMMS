@@ -29,3 +29,13 @@ On the right side there is a table with all official terminals of the company, o
 
 #Add official Terminal
 In this small panel there are three fields and three buttons. The branch name, latitude and longitude are required to be entered here. The buttons add the new terminal, clear the fields, or take you back to the official terminals page respectively.
+
+#HowToRun
+If you want to run the Application either:
+    - use the war file and execute it by
+    changing directory where GiiMMS-0.0.1-SNAPSHOT.war is located and run it by 
+    using java: **java -jar GiiMMS-0.0.1-SNAPSHOT.war**
+    - use maven:spring-boot:run with this project openened in a supported 
+    IDE    
+    
+
